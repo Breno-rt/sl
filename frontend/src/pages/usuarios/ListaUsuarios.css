@@ -1,0 +1,122 @@
+.lista-usuarios {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+}
+
+.lista-usuarios h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+.botoes-acao {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botoes-acao button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.botoes-acao button:hover {
+  opacity: 0.9;
+}
+
+.botoes-acao button.editar {
+  background-color: var(--azul-primario);
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.editar:hover {
+  background-color: var(--azul-hover);
+}
+
+.botoes-acao button.excluir {
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.excluir:hover {
+  background-color: #444;
+}
+
+.lista-usuarios ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lista-usuarios li {
+  background-color: var(--fundo-escuro);
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 6px var(--sombra-azul);
+}
+
+.lista-usuarios li strong {
+  color: var(--texto-cinza);
+}
+
+.erro {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.botoes-navegacao {
+  display: flex;
+  gap: 10px;
+}
+
+.lista-scroll {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.lista-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--azul-primario);
+  border-radius: 4px;
+}
+
+.lista-scroll::-webkit-scrollbar-track {
+  background: var(--fundo-cinza);
+}
+
+@media (max-width: 768px) {
+  .lista-usuarios {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .lista-usuarios h1 {
+    font-size: 20px;
+  }
+
+  .botoes-acao button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .lista-usuarios li {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,70 @@
+.editar-usuario {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+  color: var(--texto-claro);
+}
+
+.editar-usuario h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--texto-claro);
+}
+
+.editar-usuario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--texto-cinza);
+}
+
+.editar-usuario input,
+.editar-usuario select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+}
+
+.editar-usuario .botoes-edicao {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.editar-usuario .salvar {
+  background-color: var(--azul-primario);
+  color: white;
+}
+
+.editar-usuario .salvar:hover {
+  background-color: var(--azul-hover);
+}
+
+.editar-usuario .cancelar {
+  background-color: var(--vermelho-primario);
+  color: white;
+}
+
+.editar-usuario .cancelar:hover {
+  background-color: var(--vermelho-hover);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .editar-usuario .botoes-edicao {
+    flex-direction: column;
+  }
+
+  .editar-usuario button {
+    width: 100%;
+  }
+}

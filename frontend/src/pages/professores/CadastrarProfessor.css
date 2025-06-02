@@ -1,0 +1,159 @@
+:root {
+  --azul-primario: #3582db; /* Azul tema */
+  --azul-hover: #72a5df; /* Azul mais claro para hover */
+  --fundo-escuro: #242424; /* Preto */
+  --fundo-cinza: #3f3f3f; /* Cinza escuro */
+  --texto-claro: #ffffff; /* Branco */
+  --texto-cinza: #d8d8d8; /* Cinza claro */
+  --sombra-azul: rgba(53, 130, 219, 0.3); /* Sombra azul */
+  --vermelho-primario: rgb(209, 45, 45); /* Vermelho para cancelar */
+  --vermelho-hover: rgb(175, 74, 74); /* Vermelho mais claro para hover */
+}
+
+/* Reset de margens e paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo geral do container */
+.cadastrar-professor {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  max-width: 600px;
+  width: 90%; /* Adicionado para garantir responsividade */
+  margin: 20px auto; /* Centraliza horizontalmente */
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul); /* Sombra com azul tema */
+}
+
+/* Centralização vertical (opcional) */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+  margin: 0; /* Remove margens padrão do body */
+  background-color: var(--fundo-escuro); /* Cor de fundo para o body */
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/* Título da página */
+.cadastrar-professor h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+/* Estilo do formulário */
+.cadastrar-professor form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilo dos grupos de campos (label + input/select) */
+.cadastrar-professor .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cadastrar-professor label {
+  font-weight: bold;
+  color: var(--texto-cinza);
+}
+
+.cadastrar-professor input[type="text"],
+.cadastrar-professor input[type="email"],
+.cadastrar-professor input[type="checkbox"] {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.cadastrar-professor input[type="text"]:focus,
+.cadastrar-professor input[type="email"]:focus {
+  border: 2px solid var(--azul-primario); /* Azul tema ao focar */
+}
+
+.cadastrar-professor input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Estilo dos botões */
+.cadastrar-professor button {
+  padding: 10px 15px;
+  margin: 1%;
+  border: none;
+  border-radius: 5px;
+  color: var(--texto-claro);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cadastrar-professor button.cadastrar {
+  background-color: var(--azul-primario); /* Azul tema */
+}
+
+.cadastrar-professor button.cadastrar:hover {
+  background-color: var(--azul-hover); /* Azul mais claro ao passar o mouse */
+}
+
+.cadastrar-professor button.cancelar {
+  background-color: var(--vermelho-primario); /* Vermelho para cancelar */
+}
+
+.cadastrar-professor button.cancelar:hover {
+  background-color: var(--vermelho-hover); /* Vermelho mais claro ao passar o mouse */
+}
+
+/* Estilo do modal */
+.cadastrar-professor .modal-content {
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cadastrar-professor .modal-content button {
+  margin-top: 10px;
+  background-color: var(--azul-primario);
+}
+
+.cadastrar-professor .modal-content button:hover {
+  background-color: var(--azul-hover);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cadastrar-professor {
+    padding: 15px;
+  }
+
+  .cadastrar-professor h1 {
+    font-size: 20px; /* Título menor em telas pequenas */
+  }
+
+  .cadastrar-professor form {
+    gap: 10px;
+  }
+
+  .cadastrar-professor button {
+    width: 100%;
+  }
+}

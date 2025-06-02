@@ -1,0 +1,87 @@
+.redefinir-senha {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+}
+
+.redefinir-senha h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--texto-claro);
+}
+
+.redefinir-senha form {
+  display: flex;
+  flex-direction: column;
+}
+
+.redefinir-senha label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.redefinir-senha input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+}
+
+.redefinir-senha input:focus {
+  outline: none;
+  box-shadow: 0 0 4px var(--azul-primario);
+}
+
+.redefinir-senha button {
+  background-color: var(--azul-primario);
+  color: var(--texto-claro);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.redefinir-senha button:hover {
+  background-color: var(--azul-hover);
+}
+
+.erro {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.mensagem {
+  color: green;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+  .redefinir-senha {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .redefinir-senha h1 {
+    font-size: 20px;
+  }
+
+  .redefinir-senha button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

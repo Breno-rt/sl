@@ -1,0 +1,106 @@
+.esqueci-senha {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+}
+
+.esqueci-senha h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+.esqueci-senha form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.esqueci-senha label {
+  color: var(--texto-cinza);
+  font-weight: bold;
+}
+
+.esqueci-senha input {
+  padding: 10px;
+  border: 1px solid var(--azul-primario);
+  border-radius: 5px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+}
+
+.botoes-navegacao {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.botao-enviar {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--azul-primario);
+  color: var(--texto-claro);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+}
+
+.botao-enviar:hover {
+  background-color: var(--azul-hover);
+}
+
+.botao-voltar {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #dc3545; /* Vermelho */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+}
+
+.botao-voltar:hover {
+  background-color: #c82333; /* Vermelho mais escuro */
+}
+
+.botao-voltar-link {
+  flex: 1;
+  text-decoration: none;
+}
+
+.erro {
+  color: red;
+  font-size: 13px;
+}
+
+.mensagem {
+  color: green;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .esqueci-senha {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .esqueci-senha h1 {
+    font-size: 20px;
+  }
+
+  .esqueci-senha input {
+    font-size: 14px;
+  }
+
+  .botoes-navegacao {
+    flex-direction: column;
+  }
+}

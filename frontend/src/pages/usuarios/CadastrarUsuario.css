@@ -1,0 +1,144 @@
+:root {
+  --azul-primario: #3582db;
+  --azul-hover: #72a5df;
+  --fundo-escuro: #242424;
+  --fundo-cinza: #3f3f3f;
+  --texto-claro: #ffffff;
+  --texto-cinza: #d8d8d8;
+  --sombra-azul: rgba(53, 130, 219, 0.3);
+  --vermelho-primario: rgb(209, 45, 45);
+  --vermelho-hover: rgb(175, 74, 74);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cadastrar-usuario {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  max-width: 600px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--fundo-escuro);
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cadastrar-usuario h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+.cadastrar-usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cadastrar-usuario .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cadastrar-usuario label {
+  font-weight: bold;
+  color: var(--texto-cinza);
+}
+
+.cadastrar-usuario input,
+.cadastrar-usuario select {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.cadastrar-usuario input:focus,
+.cadastrar-usuario select:focus {
+  border: 2px solid var(--azul-primario);
+}
+
+.cadastrar-usuario button {
+  padding: 10px 15px;
+  margin: 1%;
+  border: none;
+  border-radius: 5px;
+  color: var(--texto-claro);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cadastrar-usuario button.cadastrar {
+  background-color: var(--azul-primario);
+}
+
+.cadastrar-usuario button.cadastrar:hover {
+  background-color: var(--azul-hover);
+}
+
+.cadastrar-usuario button.cancelar {
+  background-color: var(--vermelho-primario);
+}
+
+.cadastrar-usuario button.cancelar:hover {
+  background-color: var(--vermelho-hover);
+}
+
+.cadastrar-usuario .modal-content {
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cadastrar-usuario .modal-content button {
+  margin-top: 10px;
+  background-color: var(--azul-primario);
+}
+
+.cadastrar-usuario .modal-content button:hover {
+  background-color: var(--azul-hover);
+}
+
+@media (max-width: 768px) {
+  .cadastrar-usuario {
+    padding: 15px;
+  }
+
+  .cadastrar-usuario h1 {
+    font-size: 20px;
+  }
+
+  .cadastrar-usuario form {
+    gap: 10px;
+  }
+
+  .cadastrar-usuario button {
+    width: 100%;
+  }
+}

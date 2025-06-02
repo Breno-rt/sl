@@ -1,0 +1,114 @@
+/* Reset de margens e paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+/* Estilo da logo */
+.login-container .logo {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-bottom: 20px; /* Espaçamento entre a logo e o título */
+  }
+
+  /* Estilo geral da página */
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #242424, #333); /* Gradiente escuro */
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
+  
+  /* Container do formulário */
+  .login-container {
+    background-color: #333; /* Fundo escuro */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    width: 120%;
+    max-width: 450px;
+    text-align: center;
+  }
+  
+  /* Título da página */
+  .login-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Estilo dos grupos de campos (label + input) */
+  .login-container .form-group {
+    margin-bottom: 15px;
+    text-align: left; /* Alinha o texto à esquerda */
+  }
+  
+  .login-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #d8d8d8; /* Cinza claro */
+  }
+  
+  .login-container input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444; /* Fundo mais claro para os inputs */
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .login-container input:focus {
+    border: 2px solid #3582db; /* Azul arroxado ao focar */
+  }
+  
+  /* Estilo do botão */
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3582db; /* Azul tema */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-container button:hover {
+    background-color: #72a5df; /* Tom mais claro ao passar o mouse */
+  }
+  
+  /* Mensagem de erro */
+  .login-container .erro {
+    color: #ff6b6b; /* Vermelho suave */
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 20px;
+    }
+  
+    .login-container h1 {
+      font-size: 20px;
+    }
+  
+    .login-container input,
+    .login-container button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }

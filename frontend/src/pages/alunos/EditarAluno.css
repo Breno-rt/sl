@@ -1,0 +1,100 @@
+/* Estilo unificado para componentes de edição */
+:root {
+    --azul-primario: #3582db;
+    --azul-hover: #72a5df;
+    --fundo-escuro: #242424;
+    --fundo-cinza: #3f3f3f;
+    --texto-claro: #ffffff;
+    --texto-cinza: #d8d8d8;
+    --sombra-azul: rgba(53, 130, 219, 0.3);
+    --vermelho-primario: rgb(209, 45, 45);
+    --vermelho-hover: rgb(175, 74, 74);
+  }
+  
+  .editar-aluno {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--fundo-cinza);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--sombra-azul);
+    color: var(--texto-claro);
+  }
+  
+  .editar-aluno h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--texto-claro);
+  }
+  
+  .editar-aluno label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--texto-cinza);
+  }
+  
+  .editar-aluno input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    font-size: 14px;
+  }
+  
+  .editar-aluno input:focus {
+    outline: 2px solid var(--azul-primario);
+  }
+  
+  .erro {
+    color: var(--vermelho-primario);
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .editar-aluno button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .editar-aluno button:first-of-type {
+    background-color: var(--azul-primario);
+    color: white;
+  }
+  
+  .editar-aluno button:first-of-type:hover {
+    background-color: var(--azul-hover);
+  }
+  
+  .editar-aluno button:last-of-type {
+    background-color: var(--vermelho-primario);
+    color: white;
+  }
+  
+  .editar-aluno button:last-of-type:hover {
+    background-color: var(--vermelho-hover);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .editar-aluno {
+      padding: 15px;
+    }
+    
+    .editar-aluno button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }

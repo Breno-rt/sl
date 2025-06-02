@@ -1,0 +1,107 @@
+/* Estilos gerais */
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Cabeçalho */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--fundo-cinza);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para centralizar o título */
+  }
+  
+  .logo {
+    width: 200px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+  }
+  
+  .welcome-message {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  /* Botão de Logout */
+  .logout-button {
+    padding: 10px 20px;
+    background-color: var(--azul-primario);
+    color: var(--texto-claro);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: var(--azul-hover);
+  }
+  
+  /* Botões de Gerenciamento */
+  .management-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--fundo-cinza);
+  }
+  
+  .management-button {
+    padding: 10px 30px;
+    background-color: var(--fundo-cinza);
+    color: var(--texto-claro);
+    border: 2px solid var(--azul-primario);
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .management-button:hover {
+    background-color: var(--azul-hover);
+    transform: scale(1.05);
+  }
+  
+  /* Calendário */
+  .calendar-container {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--fundo-cinza);
+    overflow-y: auto;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .welcome-message {
+      position: static;
+      transform: none;
+      margin-top: 10px;
+    }
+  
+    .management-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .management-button {
+      width: 100%;
+    }
+  }

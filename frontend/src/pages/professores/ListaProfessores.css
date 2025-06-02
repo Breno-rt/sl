@@ -1,0 +1,149 @@
+:root {
+  --azul-primario: #3582db; /* Azul tema */
+  --azul-hover: #72a5df; /* Azul mais claro para hover */
+  --fundo-escuro: #242424; /* Preto */
+  --fundo-cinza: #3f3f3f; /* Cinza escuro */
+  --texto-claro: #ffffff; /* Branco */
+  --texto-cinza: #d8d8d8; /* Cinza claro */
+  --sombra-azul: rgba(53, 130, 219, 0.3); /* Sombra azul */
+  --vermelho-primario: rgb(209, 45, 45); /* Vermelho para cancelar */
+  --vermelho-hover: rgb(175, 74, 74); /* Vermelho mais claro para hover */
+}
+
+
+/* Reset de margens e paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo geral da lista */
+.lista-professores {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  width: 100%; /* Ajustado para responsividade */
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul); /* Sombra com azul tema */
+}
+
+.lista-professores h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+/* Botões de ação */
+.botoes-acao {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botoes-acao button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.botoes-acao button:hover {
+  opacity: 0.9;
+}
+
+.botoes-acao button.editar {
+  background-color: var(--azul-primario); /* Azul tema */
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.editar:hover {
+  background-color: var(--azul-hover); /* Azul mais claro ao passar o mouse */
+}
+
+.botoes-acao button.excluir {
+  background-color: var(--fundo-escuro); /* Preto */
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.excluir:hover {
+  background-color: #444; /* Cinza mais claro ao passar o mouse */
+}
+
+/* Estilo da lista de professores */
+.lista-professores ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lista-professores li {
+  background-color: var(--fundo-escuro); /* Preto */
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 6px var(--sombra-azul); /* Sombra com azul tema */
+}
+
+.lista-professores li strong {
+  color: var(--texto-cinza); /* Cinza claro */
+}
+
+/* Mensagem de erro */
+.erro {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Botões de navegação */
+.botoes-navegacao {
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .lista-professores {
+    width: 95%; /* Ajuste para telas menores */
+    padding: 15px;
+  }
+
+  .lista-professores h1 {
+    font-size: 20px; /* Título menor em telas pequenas */
+  }
+
+  .botoes-acao button {
+    padding: 6px 10px; /* Botões menores em telas pequenas */
+    font-size: 12px;
+  }
+
+  .lista-professores li {
+    padding: 10px; /* Menos padding em telas pequenas */
+  }
+}
+
+.lista-scroll {
+  max-height: 600px; /* Ajuste conforme desejar */
+  overflow-y: auto;
+  padding-right: 10px; /* espaço para não cortar conteúdo */
+}
+
+/* Estilizando a barra de rolagem para combinar com o tema */
+.lista-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--azul-primario);
+  border-radius: 4px;
+}
+
+.lista-scroll::-webkit-scrollbar-track {
+  background: var(--fundo-cinza);
+}

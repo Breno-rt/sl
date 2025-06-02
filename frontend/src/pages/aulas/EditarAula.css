@@ -1,0 +1,87 @@
+.editar-aula {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--fundo-cinza);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--sombra-azul);
+    color: var(--texto-claro);
+  }
+  
+  .editar-aula h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--texto-claro);
+  }
+  
+  .editar-aula form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .editar-aula label {
+    font-weight: bold;
+    color: var(--texto-cinza);
+  }
+  
+  .editar-aula input,
+  .editar-aula select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+  }
+  
+  .editar-aula input:focus,
+  .editar-aula select:focus {
+    outline: 2px solid var(--azul-primario);
+  }
+  
+  .editar-aula .botoes-edicao {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .editar-aula button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .editar-aula button[type="submit"] {
+    background-color: var(--azul-primario);
+    color: white;
+  }
+  
+  .editar-aula button[type="submit"]:hover {
+    background-color: var(--azul-hover);
+  }
+  
+  .editar-aula button[type="button"] {
+    background-color: var(--vermelho-primario);
+    color: white;
+  }
+  
+  .editar-aula button[type="button"]:hover {
+    background-color: var(--vermelho-hover);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .editar-aula .botoes-edicao {
+      flex-direction: column;
+    }
+    
+    .editar-aula button {
+      width: 100%;
+    }
+  }
