@@ -21,7 +21,7 @@ Dia 14/02  ->  Interações utilzando metodos post, get, put and delete funcioan
 
 Dia 14/02  -> Métodos do CRUD alunos funcionando 
 
-Dia 18/02  -> Métodos do CRUD Aulas funcionando, não esquecer que no post o id do aluno e professore devem ser um existente no banco no cluster.alunos e cluster.professores, caso o contrário não vai funcionar
+Dia 18/02  -> Métodos do CRUD Aulas funcionando
 
 - import cors from 'cors'; // <-- Importe o CORS   e    app.use(cors());  // <-- Ativa o CORS para permitir requisições de qualquer origem (dentro do file server.js)
 
@@ -162,8 +162,6 @@ Senha de app: nwmc ocwa pqqm qhbu
 
 
 🔹 Próximo
-
-- ver sobre o polling para atualização do calendário ou aviso de novas aulas agendadas 
 
 - pensar em usar uma api para mensagens whatsapp 
 
