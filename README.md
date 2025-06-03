@@ -53,7 +53,7 @@ Dia 22/02  -> Inicio frontend
 JWT_SECRET: Dentro do .env
 
 
-01/03 -> Depois de 3 dias tentando, login com frontend - api - backend totalmente funcional
+01/03 ->  api - backend totalmente funcional
 
 
 -----------------------------------------------------------Resumo até agr --------------------------------------------------------------------
