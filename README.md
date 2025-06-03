@@ -2,8 +2,6 @@
 
 --------------------------------------------------------------Backend básico ----------------------------------------------------------------
 
--> Enquanto temos so o backend (primeiro passo na criação do código), basta abrir o terminal, dar cd backend, e npm run dev;  Tem que entrar na pasta pois é la que esta o packagejson com o nodemon 
-
 -> Rota de teste usada no server.js no inicio: 
 // Rota de teste
 app.get('/', (req, res) => {
@@ -23,11 +21,7 @@ Dia 14/02  ->  Interações utilzando metodos post, get, put and delete funcioan
 
 Dia 14/02  -> Métodos do CRUD alunos funcionando 
 
-Dia 18/02  -> Métodos do CRUD Aulas funcionando, não esquecer que no post o id do aluno e professore devem ser um existente no banco no cluster.alunos e cluster.professores, caso o contrário não vai funcionar
-
-
-**Para erros no crud basta colocar em baixo do bloco try e antes do res.json(nome_do_crud) o comando: console.log("🔍 Aulas encontradas:", aulas); // <-- Adiciona esse log (ex no codigo aulas)
-
+Dia 18/02  -> Métodos do CRUD Aulas funcionando
 
 - import cors from 'cors'; // <-- Importe o CORS   e    app.use(cors());  // <-- Ativa o CORS para permitir requisições de qualquer origem (dentro do file server.js)
 
@@ -49,21 +43,6 @@ Dia 22/02  -> Inicio frontend
  │   ├── main.jsx        # Ponto de entrada do React
  │   ├── App.jsx         # Componente principal
  │   ├── index.css       # Estilos globais
-
-
-- Comando para teste do frontend, abrir o app.jsx apagar tudo e substituir por: 
-
-function App() {
-  return (
-    <div>
-      <h1>Bem-vindo à Société de Langues</h1>
-    </div>
-  );
-}
-
-export default App;
-
-- Depois apagar tudo e colocar o caminho para a pagina Home.jsx dentro da pasta pages 
 
 
 - O React Router permite criar múltiplas páginas dentro do app -> npm install react-router-dom
@@ -187,8 +166,6 @@ Senha de app: nwmc ocwa pqqm qhbu
 
 
 🔹 Próximo
-
-- ver sobre o polling para atualização do calendário ou aviso de novas aulas agendadas 
 
 - pensar em usar uma api para mensagens whatsapp 
 
