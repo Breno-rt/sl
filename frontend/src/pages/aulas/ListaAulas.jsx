@@ -54,7 +54,7 @@ function ListaAulas() {
           <button>Agendar Nova Aula</button>
         </Link>
         <Link to="/">
-          <button>Voltar</button>
+          <button className="botao-voltar">Voltar</button>
         </Link>
       </div>
       <br />

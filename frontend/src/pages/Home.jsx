@@ -16,7 +16,7 @@ function Home() {
       {/* Cabeçalho */}
       <div className="header">
         <img src={logo} alt="Logo da Escola" className="logo" />
-        <h1 className="welcome-message">Bem-vindo, Lucas!</h1>
+        <h1 className="welcome-message">Bem-vindo</h1>
         <button className="logout-button" onClick={handleLogout}>
           Sair
         </button>

@@ -39,7 +39,7 @@ function ListaAlunos() {
           <button>Cadastrar Novo Aluno</button>
         </Link>
         <Link to="/">
-          <button>Voltar</button>
+          <button className="botao-voltar">Voltar</button>
         </Link>
       </div>
       <br />
