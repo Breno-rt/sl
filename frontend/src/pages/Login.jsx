@@ -48,6 +48,7 @@ function Login() {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
             required
+            autoComplete="new-password" 
           />
         </div>
         <br />
