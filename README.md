@@ -2,19 +2,6 @@
 
 --------------------------------------------------------------Backend básico ----------------------------------------------------------------
 
--> Rota de teste usada no server.js no inicio: 
-// Rota de teste
-app.get('/', (req, res) => {
-  res.send('Backend funcionando!');
-});
-
--> Rotas de teste da api (utiliazda na routes.js)
-// Rota para testar se a API está funcionando
-router.get('/', (req, res) => {
-  res.send('API funcionando!');
-});
-
-
 Dia 08/02  -> Criação CRUD Professores no routes.js
 
 Dia 14/02  ->  Interações utilzando metodos post, get, put and delete funcioando ok  -> Conectividade com banco de dados funcionando
@@ -23,12 +10,11 @@ Dia 14/02  -> Métodos do CRUD alunos funcionando
 
 Dia 18/02  -> Métodos do CRUD Aulas funcionando
 
-- import cors from 'cors'; // <-- Importe o CORS   e    app.use(cors());  // <-- Ativa o CORS para permitir requisições de qualquer origem (dentro do file server.js)
-
-
 ----------------------------------------------------------------Frontend básico --------------------------------------------------------------
 
 Dia 22/02  -> Inicio frontend
+
+- Estrutura
 
 📂 frontend
  ├── 📂 src
@@ -50,11 +36,7 @@ Dia 22/02  -> Inicio frontend
 
 26/02 -> Validação com usuários e login funcionando no thunder (so backedn no momento), duração do token gerado: 1h
 
-JWT_SECRET: Dentro do .env
-
-
 01/03 ->  api - backend totalmente funcional
-
 
 -----------------------------------------------------------Resumo até agr --------------------------------------------------------------------
 
@@ -85,7 +67,7 @@ O que já fizemos ✅
 🔹 Organizar as páginas do frontend em pastas separadas para manter o código mais limpo. ✅
 
 
-🔹 Melhorias Futuras (Para depois das funcionalidades)
+🎯 Melhorias Futuras (Para depois das funcionalidades)
 
 -> Calendario
 🔹 Implementar a validação de conflitos de aulas com mesmos professores/horários/alunos   ✅
@@ -93,8 +75,8 @@ O que já fizemos ✅
 🔹 Filtro no calendário 
 🔹 Botão para edição ou exclusão de aulas no modal do calendario ✅
 🔹 Algum botão no calendaio ou perto com link redirecionando para a pagina de agendamento de aulas? ✅
-🔹 Colocar uma sessão para estatísticas do calendario: nº de aulas por prof/aluno, horários mais ocupados? Bem talvez 
-🔹 Ver sobre integração com google calendar e tal Bem talvez
+🔹 Colocar uma sessão para estatísticas do calendario: nº de aulas por prof/aluno, horários mais ocupados?  talvez 
+🔹 Ver sobre integração com google calendar. talvez
 🔹 Barra de pesquisa para achar aulas/profs/alunos
 
 -> Design
@@ -115,8 +97,6 @@ O que já fizemos ✅
 ---------------------------------------------------------------- CONTINUAÇÃO ---------------------------------------------------------------
 
 - 04/03 -> Botão de exclusão para profs/alunos/aulas - ✅
-
-Senha de app: nwmc ocwa pqqm qhbu
 
 - 05/03 -> Envio de emails completo (Alunos e professores) - ✅
 
@@ -141,8 +121,6 @@ Senha de app: nwmc ocwa pqqm qhbu
 - 02/04 -> Files separados para edição para diminuir sobrecarga as listas c/ estilo css padrão V✅
 
 - 02/04 -> Container de exclusão feito V✅
-
-- 08/05 -> Voltei carai!! Depois de um mes de prova 
 
 - 09/05 -> Plano de fundo adicionado V✅
 
