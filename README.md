@@ -160,9 +160,11 @@ Senha de app: nwmc ocwa pqqm qhbu
 
 - 29/05 -> ver sobre o polling para atualização do calendário ou aviso de novas aulas agendadas ✅
 
+- 03/07 -> Edição complementar de responsividade das paginas ✅
+
 
 🔹 Próximo
 
-- pensar em usar uma api para mensagens whatsapp 
+- api para mensagens whatsapp 
 
-- Ver hospedagem 
+- Hospedar 
