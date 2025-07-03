@@ -99,11 +99,13 @@ function CadastrarAluno() {
           <label><input type="checkbox" value="Francês" onChange={handleMateriaChange} /> Francês</label>
         </div>
         
-        <div className="botoes-aluno"></div>
+        <div className="botoes-aluno">
         <button className="cadastrar" type="submit">Cadastrar</button>
         <Link to="/alunos">
           <button className="cancelar">Cancelar</button>
         </Link>
+        </div>
+
       </form>
 
       {/* Modal para exibir mensagens */}

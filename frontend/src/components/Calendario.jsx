@@ -184,10 +184,12 @@ const handleEditarAula = (id) => {
         shouldCloseOnOverlayClick={false}
         contentLabel="Detalhes da Aula"
         style={{
-          content: {
-            width: "30%",
+           content: {
+            width: "90vw",            // até 90% da largura da tela
+            maxWidth: "500px",        // limite para desktop
             height: "auto",
-            maxHeight: "40%",
+            maxHeight: "90vh",        // até 90% da altura da tela
+            overflowY: "auto",        // scroll interno se ultrapassar
             margin: "auto",
             padding: "20px",
             borderRadius: "10px",
@@ -243,21 +245,24 @@ const handleEditarAula = (id) => {
         contentLabel="Aulas do Dia"
         style={{
           content: {
-            width: "40%",
+            width: "90vw",
+            maxWidth: "600px",
             height: "auto",
-            maxHeight: "60%",
+            maxHeight: "90vh",
+            overflowY: "auto",
             margin: "auto",
             padding: "20px",
             borderRadius: "10px",
             backgroundColor: "#222",
             color: "#fff",
             zIndex: 1000,
-          },
+        },
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-            zIndex: 999,
-          },
-        }}
+          backgroundColor: "rgba(0, 0, 0, 0.75)",
+          zIndex: 999,
+        },
+      }}
+
       >
         <h2 style={{ textAlign: "center", marginBottom: "15px", margin: "1%" }}>
           Aulas do dia {dataSelecionada}

@@ -117,10 +117,13 @@ function AgendarAula() {
           <input type="time" id="horario" value={horario} onChange={(e) => setHorario(e.target.value)} required />
         </div>
     
-        <button className="agendar" type="submit">Agendar Aula</button>
+        <div className="botoes-aluno">
+          <button className="agendar" type="submit">Agendar Aula</button>
         <Link to="/aulas">
           <button className="cancelar">Voltar</button>
         </Link>
+        </div>
+
       </form>
 
       {/* Modal para exibir mensagens */}

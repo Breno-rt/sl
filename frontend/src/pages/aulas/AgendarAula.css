@@ -87,6 +87,7 @@ body {
 /* Estilo dos botões */
 .agendar-aula button {
   padding: 10px 15px;
+  margin: 1%;
   border: none;
   border-radius: 5px;
   color: var(--texto-claro);
