@@ -362,8 +362,6 @@ router.post('/aulas', autenticarToken, async (req, res) => {
       include: { professor: true, aluno: true }, // Inclui os dados do professor e aluno
     });
 
-    console.log("✅ POST - Aula salva:", novaAula);
-
     // 🔹 Função para formatar a data (DD/MM/YYYY)
     const formatarData = (data) => {
       const [ano, mes, dia] = data.split("-");
@@ -478,8 +476,6 @@ router.put('/aulas/:id', autenticarToken, async (req, res) => {
       },
       include: { professor: true, aluno: true }, // Inclui os dados do professor e aluno
     });
-
-    console.log("✅ PUT - Aula atualizada:", aulaAtualizada);
 
     // 🔹 Função para formatar a data (DD/MM/YYYY)
     const formatarData = (data) => {

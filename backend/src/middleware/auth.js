@@ -15,8 +15,6 @@ jwt.verify(token.split(" ")[1], process.env.JWT_SECRET, (err, decoded) => {
     return res.status(401).json({ error: "Token inválido!" });
   }
 
-  console.log("Token decodificado:", decoded);
-
   req.usuario = decoded;
   req.usuarioId = decoded.id;
 
