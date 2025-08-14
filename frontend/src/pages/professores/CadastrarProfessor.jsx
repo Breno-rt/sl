@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import Modal from "react-modal";
 import "./CadastrarProfessor.css"
+import FadeContainer from "../../components/animations/FadeContainer";
+
 
 // Configuração global para o modal
 Modal.setAppElement("#root");
@@ -57,7 +59,8 @@ function CadastrarProfessor() {
   };
 
   return (
-    <div className="cadastrar-professor">
+    <FadeContainer>
+      <div className="cadastrar-professor">
       <h1>Cadastrar Professor</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -133,6 +136,8 @@ function CadastrarProfessor() {
         <button onClick={fecharModal}>OK</button>
       </Modal>
     </div>
+    </FadeContainer>
+    
   );
 }
 

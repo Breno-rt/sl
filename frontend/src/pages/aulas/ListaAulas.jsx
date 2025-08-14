@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./ListaAulas.css";
+import FadeContainer from "../../components/animations/FadeContainer"; 
 
 // Função para formatar a data corretamente
 function formatarData(data) {
@@ -47,41 +48,52 @@ function ListaAulas() {
   }
 
   return (
-    <div className="lista-aulas">
-      <h1>Lista de Aulas</h1>
-      <div className="botoes-navegacao">
-        <Link to="/agendar-aula">
-          <button>Agendar Nova Aula</button>
-        </Link>
-        <Link to="/">
-          <button className="botao-voltar">Voltar</button>
-        </Link>
-      </div>
-      <br />
-      {aulas.length > 0 ? (
-        <div className="lista-scroll">
-          <ul>
-          {aulas.map((aula) => (
-            <li key={aula.id}>
-              <strong>📚 Matéria:</strong> {aula.materia} <br />
-              <strong>📅 Data:</strong> {formatarData(aula.data)} <br />
-              <strong>⏰ Horário:</strong> {aula.horario} <br />
-              <strong>👨‍🏫 Professor:</strong> {aula.professor.nome} <br />
-              <strong>👨‍🎓 Aluno:</strong> {aula.aluno.nome} <br />
-              <br />
-              <div className="botoes-acao">
-                <button className="editar" onClick={() => navigate(`/editar-aula/${aula.id}`)}>✏️ Editar</button>
-                <button className="excluir" onClick={() => handleDeleteAula(aula.id)}>❌ Excluir</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+    <FadeContainer> {/* 👈 Aplica a animação de transição aqui */}
+      <div className="lista-aulas">
+        <h1>Lista de Aulas</h1>
+        <div className="botoes-navegacao">
+          <Link to="/agendar-aula">
+            <button>Agendar Nova Aula</button>
+          </Link>
+          <Link to="/">
+            <button className="botao-voltar">Voltar</button>
+          </Link>
         </div>
-
-      ) : (
-        <p>❌ Nenhuma aula agendada.</p>
-      )}
-    </div>
+        <br />
+        {aulas.length > 0 ? (
+          <div className="lista-scroll">
+            <ul>
+              {aulas.map((aula) => (
+                <li key={aula.id}>
+                  <strong>📚 Matéria:</strong> {aula.materia} <br />
+                  <strong>📅 Data:</strong> {formatarData(aula.data)} <br />
+                  <strong>⏰ Horário:</strong> {aula.horario} <br />
+                  <strong>👨‍🏫 Professor:</strong> {aula.professor.nome} <br />
+                  <strong>👨‍🎓 Aluno:</strong> {aula.aluno.nome} <br />
+                  <br />
+                  <div className="botoes-acao">
+                    <button
+                      className="editar"
+                      onClick={() => navigate(`/editar-aula/${aula.id}`)}
+                    >
+                      ✏️ Editar
+                    </button>
+                    <button
+                      className="excluir"
+                      onClick={() => handleDeleteAula(aula.id)}
+                    >
+                      ❌ Excluir
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>❌ Nenhuma aula agendada.</p>
+        )}
+      </div>
+    </FadeContainer>
   );
 }
 

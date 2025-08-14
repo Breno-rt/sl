@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../services/api";
-import Modal from "react-modal"; // Importe o Modal
+import Modal from "react-modal"; 
 import "./AgendarAula.css"
+import FadeContainer from "../../components/animations/FadeContainer";
+
 
 // Configuração global para o modal
 Modal.setAppElement("#root");
@@ -75,7 +77,8 @@ function AgendarAula() {
   };
 
   return (
-    <div className="agendar-aula">
+    <FadeContainer>
+      <div className="agendar-aula">
       <h1>Agendar Aula</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -151,6 +154,8 @@ function AgendarAula() {
         <button onClick={fecharModal}>OK</button>
       </Modal>
     </div>
+    </FadeContainer>
+    
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./ListaUsuarios.css";
+import FadeContainer from "../../components/animations/FadeContainer";
 
 function ListaUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -31,7 +32,8 @@ function ListaUsuarios() {
   }
 
   return (
-    <div className="lista-usuarios">
+    <FadeContainer>
+      <div className="lista-usuarios">
       <h1>Lista de Usuários</h1>
       <div className="botoes-navegacao">
         <Link to="/cadastrar-usuario">
@@ -61,6 +63,8 @@ function ListaUsuarios() {
         <p>❌ Nenhum usuário encontrado.</p>
       )}
     </div>
+    </FadeContainer>
+    
   );
 }
 

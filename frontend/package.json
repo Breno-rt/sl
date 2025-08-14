@@ -15,6 +15,7 @@
     "@fullcalendar/react": "^6.1.15",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.9",
     "jwt-decode": "^4.0.0",
     "moment-timezone": "^0.5.47",
     "prop-types": "^15.8.1",

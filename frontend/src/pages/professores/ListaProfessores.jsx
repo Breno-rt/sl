@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import "./ListaProfessores.css"; // Importando o CSS
+import "./ListaProfessores.css"; 
+import FadeContainer from "../../components/animations/FadeContainer";
 
 function ListaProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -31,7 +32,8 @@ function ListaProfessores() {
   }
 
   return (
-    <div className="lista-professores">
+    <FadeContainer>
+      <div className="lista-professores">
       <h1>Lista de Professores</h1>
       <div className="botoes-navegacao">
         <Link to="/cadastrar-professor">
@@ -63,6 +65,8 @@ function ListaProfessores() {
         <p>❌ Nenhum professor encontrado.</p>
       )}
     </div>
+    </FadeContainer>
+    
   );
 }
 

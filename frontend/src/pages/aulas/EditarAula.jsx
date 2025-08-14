@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./EditarAula.css"
+import FadeContainer from "../../components/animations/FadeContainer";
+
 
 function EditarAula() {
   const { id } = useParams();
@@ -58,7 +60,8 @@ function EditarAula() {
   };
 
   return (
-    <div className="editar-aula">
+    <FadeContainer>
+      <div className="editar-aula">
       <h1>Editar Aula</h1>
       <form onSubmit={handleSaveEdit}>
         <label>Data:</label>
@@ -82,6 +85,8 @@ function EditarAula() {
         </div>
       </form>
     </div>
+    </FadeContainer>
+    
   );
 }
 

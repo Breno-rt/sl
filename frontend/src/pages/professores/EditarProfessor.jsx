@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./EditarProfessor.css"
+import FadeContainer from "../../components/animations/FadeContainer";
+
 
 function EditarProfessor() {
   const { id } = useParams();
@@ -52,7 +54,8 @@ function EditarProfessor() {
   };
 
   return (
-    <div className="editar-professor">
+    <FadeContainer>
+      <div className="editar-professor">
       <h1>Editar Professor</h1>
       <label htmlFor="nome">Nome:</label>
       <input
@@ -88,6 +91,8 @@ function EditarProfessor() {
         </button>
       </div>
     </div>
+    </FadeContainer>
+    
   );
 }
 

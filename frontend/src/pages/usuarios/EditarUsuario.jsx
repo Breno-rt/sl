@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./EditarUsuario.css";
+import FadeContainer from "../../components/animations/FadeContainer";
+
 
 function EditarUsuario() {
   const { id } = useParams();
@@ -101,7 +103,8 @@ function EditarUsuario() {
   if (loading) return <p>Carregando dados do usuário...</p>;
 
   return (
-    <div className="editar-usuario">
+    <FadeContainer>
+      <div className="editar-usuario">
       <h1>Editar Usuário</h1>
 
       <label htmlFor="nome">Nome:</label>
@@ -165,6 +168,8 @@ function EditarUsuario() {
         </button>
       </div>
     </div>
+    </FadeContainer>
+    
   );
 }
 
