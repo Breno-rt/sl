@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../services/api";
-import Modal from "react-modal"; 
 import "./AgendarAula.css"
 import FadeContainer from "../../components/animations/FadeContainer";
+import ConfirmModal from "../../components/modal/ConfirmModal"; 
 
-
-// Configuração global para o modal
-Modal.setAppElement("#root");
 
 function AgendarAula() {
   const [materia, setMateria] = useState("");
@@ -130,29 +127,12 @@ function AgendarAula() {
       </form>
 
       {/* Modal para exibir mensagens */}
-      <Modal
-        isOpen={modalAberto}
-        onRequestClose={fecharModal}
-        contentLabel="Mensagem"
-        style={{
-          content: {
-            width: "30%",
-            height: "20%",
-            margin: "auto",
-            padding: "20px",
-            borderRadius: "10px",
-            backgroundColor: "#222",
-            color: "#fff",
-            textAlign: "center",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-          },
-        }}
-      >
-        <p>{modalMensagem}</p>
-        <button onClick={fecharModal}>OK</button>
-      </Modal>
+        <ConfirmModal
+          isOpen={modalAberto}
+          message={modalMensagem}
+          onConfirm={fecharModal}
+          confirmText="OK"
+        />
     </div>
     </FadeContainer>
     

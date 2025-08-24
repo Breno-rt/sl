@@ -1,23 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import Modal from "react-modal";
-import "./CadastrarAluno.css"
+import "./CadastrarAluno.css";
 import FadeContainer from "../../components/animations/FadeContainer";
-
-
-
-// Configuração global para o modal
-Modal.setAppElement("#root");
+import ConfirmModal from "../../components/modal/ConfirmModal"; // ✅ importamos o modal genérico
 
 function CadastrarAluno() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
   const [materia, setMateria] = useState([]);
-  const [modalAberto, setModalAberto] = useState(false); // Estado para controlar o modal
-  const [modalMensagem, setModalMensagem] = useState(""); // Mensagem do modal
-  const [modalTipo, setModalTipo] = useState(""); // Tipo do modal (sucesso, erro)
+  const [modalAberto, setModalAberto] = useState(false); // estado modal
+  const [modalMensagem, setModalMensagem] = useState(""); // mensagem modal
+  const [modalTipo, setModalTipo] = useState(""); // "sucesso" ou "erro"
   const navigate = useNavigate();
 
   function handleMateriaChange(event) {
@@ -52,93 +47,90 @@ function CadastrarAluno() {
     }
   }
 
+  // Quando fecha modal → se sucesso, redireciona
   const fecharModal = () => {
     setModalAberto(false);
     if (modalTipo === "sucesso") {
-      navigate("/alunos"); // Redireciona para a lista de alunos após sucesso
+      navigate("/alunos");
     }
   };
 
   return (
     <FadeContainer>
       <div className="cadastrar-aluno">
-      <h1>Cadastrar Aluno</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nome">Nome: </label>
-          <input
-            type="text"
-            id="nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-          />
-        </div>
+        <h1>Cadastrar Aluno</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="nome">Nome: </label>
+            <input
+              type="text"
+              id="nome"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor="email">Email: </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="telefone">Telefone: </label>
-          <input
-            type="text"
-            id="telefone"
-            value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor="telefone">Telefone: </label>
+            <input
+              type="text"
+              id="telefone"
+              value={telefone}
+              onChange={(e) => setTelefone(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="Matéria">Matéria: </label>
-          <label><input type="checkbox" value="Inglês" onChange={handleMateriaChange} /> Inglês</label>
-          <label><input type="checkbox" value="Francês" onChange={handleMateriaChange} /> Francês</label>
-        </div>
-        
-        <div className="botoes-aluno">
-        <button className="cadastrar" type="submit">Cadastrar</button>
-        <Link to="/alunos">
-          <button className="cancelar">Cancelar</button>
-        </Link>
-        </div>
+          <div>
+            <label htmlFor="Matéria">Matéria: </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Inglês"
+                onChange={handleMateriaChange}
+              />{" "}
+              Inglês
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Francês"
+                onChange={handleMateriaChange}
+              />{" "}
+              Francês
+            </label>
+          </div>
 
-      </form>
+          <div className="botoes-aluno">
+            <button className="cadastrar" type="submit">
+              Cadastrar
+            </button>
+            <Link to="/alunos">
+              <button className="cancelar">Cancelar</button>
+            </Link>
+          </div>
+        </form>
 
-      {/* Modal para exibir mensagens */}
-      <Modal
-        isOpen={modalAberto}
-        onRequestClose={fecharModal}
-        contentLabel="Mensagem"
-        style={{
-          content: {
-            width: "30%",
-            height: "20%",
-            margin: "auto",
-            padding: "20px",
-            borderRadius: "10px",
-            backgroundColor: "#222",
-            color: "#fff",
-            textAlign: "center",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-          },
-        }}
-      >
-        <p>{modalMensagem}</p>
-        <button onClick={fecharModal}>OK</button>
-      </Modal>
-    </div>
+        <ConfirmModal
+          isOpen={modalAberto}
+          message={modalMensagem}
+          onConfirm={fecharModal}
+          confirmText="OK"
+        />
+      </div>
     </FadeContainer>
-    
   );
 }
 

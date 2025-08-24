@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import PropTypes from "prop-types"; // 👈 importa aqui
+import PropTypes from "prop-types";
 
 export default function FadeContainer({ children }) {
   return (
@@ -7,14 +7,13 @@ export default function FadeContainer({ children }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, ease: "easeOut" }} 
     >
       {children}
     </motion.div>
   );
 }
 
-// 👇 adiciona a validação do tipo da prop
 FadeContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };

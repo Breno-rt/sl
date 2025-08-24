@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import "./EditarAluno.css"
+import "./EditarAluno.css";
 import FadeContainer from "../../components/animations/FadeContainer";
-
+import ConfirmModal from "../../components/modal/ConfirmModal";
 
 function EditarAluno() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ nome: "", email: "", telefone: "" });
   const [errors, setErrors] = useState({});
+
+  // Estado do modal de confirmação
+  const [modalAberto, setModalAberto] = useState(false);
+  const [modalMensagem, setModalMensagem] = useState("");
 
   useEffect(() => {
     async function fetchAluno() {
@@ -40,54 +44,72 @@ function EditarAluno() {
 
     try {
       await api.put(`/alunos/${id}`, formData);
-      navigate("/alunos"); // Redireciona após salvar
+      setModalMensagem("Aluno editado com sucesso!");
+      setModalAberto(true); // abre o modal de sucesso
     } catch (error) {
       console.error("❌ Erro ao atualizar aluno", error);
+      setModalMensagem("Erro ao editar aluno.");
+      setModalAberto(true); // abre o modal de erro
+    }
+  };
+
+  const fecharModal = () => {
+    setModalAberto(false);
+    if (modalMensagem === "Aluno editado com sucesso!") {
+      navigate("/alunos"); // redireciona após fechar modal de sucesso
     }
   };
 
   return (
     <FadeContainer>
       <div className="editar-aluno">
-      <h2>Editar Aluno</h2>
-      <label htmlFor="nome">Nome:</label>
-      <input
-        id="nome"
-        type="text"
-        value={formData.nome}
-        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-        placeholder="Nome"
-      />
-      {errors.nome && <span className="erro">{errors.nome}</span>}
-      <br /><br />
+        <h2>Editar Aluno</h2>
 
-      <label htmlFor="email">Email:</label>
-      <input
-        id="email"
-        type="email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        placeholder="Email"
-      />
-      {errors.email && <span className="erro">{errors.email}</span>}
-      <br /><br />
+        <label htmlFor="nome">Nome:</label>
+        <input
+          id="nome"
+          type="text"
+          value={formData.nome}
+          onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+          placeholder="Nome"
+        />
+        {errors.nome && <span className="erro">{errors.nome}</span>}
+        <br /><br />
 
-      <label htmlFor="telefone">Telefone:</label>
-      <input
-        id="telefone"
-        type="text"
-        value={formData.telefone}
-        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-        placeholder="Telefone"
-      />
-      {errors.telefone && <span className="erro">{errors.telefone}</span>}
-      <br /><br />
+        <label htmlFor="email">Email:</label>
+        <input
+          id="email"
+          type="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          placeholder="Email"
+        />
+        {errors.email && <span className="erro">{errors.email}</span>}
+        <br /><br />
 
-      <button onClick={handleSaveEdit}>Salvar</button>
-      <button onClick={() => navigate("/alunos")}>Cancelar</button>
-    </div>
+        <label htmlFor="telefone">Telefone:</label>
+        <input
+          id="telefone"
+          type="text"
+          value={formData.telefone}
+          onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+          placeholder="Telefone"
+        />
+        {errors.telefone && <span className="erro">{errors.telefone}</span>}
+        <br /><br />
+
+        <button onClick={handleSaveEdit}>Salvar</button>
+        <button onClick={() => navigate("/alunos")}>Cancelar</button>
+
+        {/* Modal de confirmação */}
+        <ConfirmModal
+          isOpen={modalAberto}
+          message={modalMensagem}
+          onConfirm={fecharModal}
+          confirmText="OK"
+        />
+      </div>
     </FadeContainer>
-    
   );
 }
 

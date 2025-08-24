@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import Modal from "react-modal";
 import "./CadastrarProfessor.css"
 import FadeContainer from "../../components/animations/FadeContainer";
+import ConfirmModal from "../../components/modal/ConfirmModal"; 
 
 
-// Configuração global para o modal
-Modal.setAppElement("#root");
 
 function CadastrarProfessor() {
   const [nome, setNome] = useState("");
@@ -51,10 +49,10 @@ function CadastrarProfessor() {
     }
   }
 
-  const fecharModal = () => {
+   const fecharModal = () => {
     setModalAberto(false);
     if (modalTipo === "sucesso") {
-      navigate("/professores"); // Redireciona para a lista de professores após sucesso
+      navigate("/professores");
     }
   };
 
@@ -111,30 +109,12 @@ function CadastrarProfessor() {
 
       </form>
 
-      {/* Modal para exibir mensagens */}
-      <Modal
-        isOpen={modalAberto}
-        onRequestClose={fecharModal}
-        contentLabel="Mensagem"
-        style={{
-          content: {
-            width: "30%",
-            height: "20%",
-            margin: "auto",
-            padding: "20px",
-            borderRadius: "10px",
-            backgroundColor: "#222",
-            color: "#fff",
-            textAlign: "center",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-          },
-        }}
-      >
-        <p>{modalMensagem}</p>
-        <button onClick={fecharModal}>OK</button>
-      </Modal>
+       <ConfirmModal
+          isOpen={modalAberto}
+          message={modalMensagem}
+          onConfirm={fecharModal}
+          confirmText="OK"
+        />
     </div>
     </FadeContainer>
     

@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import Modal from "react-modal";
 import "./CadastrarUsuario.css";
 import FadeContainer from "../../components/animations/FadeContainer";
+import ConfirmModal from "../../components/modal/ConfirmModal"; 
 
-
-Modal.setAppElement("#root");
 
 function CadastrarUsuario() {
   const [nome, setNome] = useState("");
@@ -81,29 +79,12 @@ function CadastrarUsuario() {
         </div>
       </form>
 
-      <Modal
-        isOpen={modalAberto}
-        onRequestClose={fecharModal}
-        contentLabel="Mensagem"
-        style={{
-          content: {
-            width: "30%",
-            height: "20%",
-            margin: "auto",
-            padding: "20px",
-            borderRadius: "10px",
-            backgroundColor: "#222",
-            color: "#fff",
-            textAlign: "center",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-          },
-        }}
-      >
-        <p>{modalMensagem}</p>
-        <button onClick={fecharModal}>OK</button>
-      </Modal>
+        <ConfirmModal
+          isOpen={modalAberto}
+          message={modalMensagem}
+          onConfirm={fecharModal}
+          confirmText="OK"
+        />
     </div>
     </FadeContainer>
     

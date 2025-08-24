@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./ListaAulas.css";
-import FadeContainer from "../../components/animations/FadeContainer"; 
+import FadeContainer from "../../components/animations/FadeContainer";
+import DeleteConfirmModal from "../../components/modal/DeleteConfirmModal"; 
 
-// Função para formatar a data corretamente
 function formatarData(data) {
   if (!data) return "Data inválida";
   try {
@@ -18,6 +18,8 @@ function formatarData(data) {
 
 function ListaAulas() {
   const [aulas, setAulas] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [aulaParaDeletar, setAulaParaDeletar] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,24 +33,35 @@ function ListaAulas() {
     }
     fetchAulas();
 
-    const interval = setInterval(fetchAulas, 5000); // polling a cada 5 segundos
-
-    return () => clearInterval(interval); // limpa intervalo ao desmontar
+    const interval = setInterval(fetchAulas, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  async function handleDeleteAula(id) {
-    if (window.confirm("Tem certeza que deseja excluir esta aula?")) {
+  function openDeleteModal(id) {
+    setAulaParaDeletar(id);
+    setModalAberto(true);
+  }
+
+  function closeDeleteModal() {
+    setAulaParaDeletar(null);
+    setModalAberto(false);
+  }
+
+  async function handleConfirmDelete() {
+    if (aulaParaDeletar) {
       try {
-        await api.delete(`/aulas/${id}`);
-        setAulas(aulas.filter((aula) => aula.id !== id));
+        await api.delete(`/aulas/${aulaParaDeletar}`);
+        setAulas(aulas.filter((aula) => aula.id !== aulaParaDeletar));
       } catch (error) {
         console.error("❌ Erro ao excluir aula", error);
+      } finally {
+        closeDeleteModal();
       }
     }
   }
 
   return (
-    <FadeContainer> {/* 👈 Aplica a animação de transição aqui */}
+    <FadeContainer>
       <div className="lista-aulas">
         <h1>Lista de Aulas</h1>
         <div className="botoes-navegacao">
@@ -69,8 +82,7 @@ function ListaAulas() {
                   <strong>📅 Data:</strong> {formatarData(aula.data)} <br />
                   <strong>⏰ Horário:</strong> {aula.horario} <br />
                   <strong>👨‍🏫 Professor:</strong> {aula.professor.nome} <br />
-                  <strong>👨‍🎓 Aluno:</strong> {aula.aluno.nome} <br />
-                  <br />
+                  <strong>👨‍🎓 Aluno:</strong> {aula.aluno.nome} <br /><br />
                   <div className="botoes-acao">
                     <button
                       className="editar"
@@ -80,7 +92,7 @@ function ListaAulas() {
                     </button>
                     <button
                       className="excluir"
-                      onClick={() => handleDeleteAula(aula.id)}
+                      onClick={() => openDeleteModal(aula.id)}
                     >
                       ❌ Excluir
                     </button>
@@ -92,6 +104,14 @@ function ListaAulas() {
         ) : (
           <p>❌ Nenhuma aula agendada.</p>
         )}
+
+        {/* ✅ Modal de exclusão */}
+        <DeleteConfirmModal
+          isOpen={modalAberto}
+          message="Tem certeza que deseja excluir esta aula?"
+          onConfirm={handleConfirmDelete}
+          onCancel={closeDeleteModal}
+        />
       </div>
     </FadeContainer>
   );

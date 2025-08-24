@@ -1,0 +1,87 @@
+.overlaylista {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.modallista {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modallista h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.lista-aulas-dia {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.aula-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  margin: 6px 0;
+  background: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.aula-item:hover {
+  background: #444;
+}
+
+.horario {
+  font-weight: bold;
+}
+
+.pontinho {
+  opacity: 0.7;
+}
+
+.acoes {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.acoes button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.acoes button:hover {
+  opacity: 0.9;
+}
+
+.acoes button.fechar {
+  background: #db3535;
+  color: white;
+}
+
+.acoes button:not(.fechar) {
+  background: #3582db;
+  color: white;
+}

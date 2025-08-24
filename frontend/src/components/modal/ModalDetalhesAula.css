@@ -1,0 +1,66 @@
+.overlaydetalhes {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.modaldetalhes {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.acoes {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.acoes button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.acoes button:hover {
+  opacity: 0.9;
+}
+
+.acoes button.excluir {
+  background: #db3535;
+  color: white;
+}
+
+.acoes button.editar {
+  background: #3582db;
+  color: white;
+}
+
+.acoes button.fechar {
+  background: #3f3f3f;
+  color: white;
+}
