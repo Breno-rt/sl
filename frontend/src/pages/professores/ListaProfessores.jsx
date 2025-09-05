@@ -27,7 +27,7 @@ function ListaProfessores() {
   function openDeleteModal(id) {
     setProfessorToDelete(id);
     setModalOpen(true);
-  }
+  } 
 
   function closeDeleteModal() {
     setProfessorToDelete(null);

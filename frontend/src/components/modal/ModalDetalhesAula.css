@@ -64,3 +64,24 @@
   background: #3f3f3f;
   color: white;
 }
+
+.filtro-professor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.filtro-professor label {
+  font-weight: bold;
+}
+
+.filtro-professor select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}

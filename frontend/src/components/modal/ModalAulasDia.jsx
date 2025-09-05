@@ -1,10 +1,21 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactDOM from "react-dom"; // ADICIONE ESTA IMPORT
+import ReactDOM from "react-dom";
 import "./ModalAulasDia.css";
 
 function ModalAulasDia({ isOpen, onClose, dataSelecionada, aulasDoDia, onAulaClick }) {
-  // Use Portal para renderizar fora da hierarquia principal
+  const [professorFiltro, setProfessorFiltro] = useState("todos");
+
+  // Lista única de professores
+  const professoresUnicos = [...new Set(aulasDoDia.map((aula) => aula.extendedProps.professor))];
+
+  // Aplica o filtro
+  const aulasFiltradas =
+    professorFiltro === "todos"
+      ? aulasDoDia
+      : aulasDoDia.filter((aula) => aula.extendedProps.professor === professorFiltro);
+
   return ReactDOM.createPortal(
     <AnimatePresence>
       {isOpen && (
@@ -16,6 +27,7 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, aulasDoDia, onAulaCli
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
+
           <motion.div
             className="modallista"
             initial={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -24,8 +36,26 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, aulasDoDia, onAulaCli
           >
             <h2>Aulas do dia {dataSelecionada}</h2>
 
+            {/* Filtro de professor */}
+            {professoresUnicos.length > 1 && (
+              <div className="filtro-professor">
+                <label>Filtrar por professor: </label>
+                <select
+                  value={professorFiltro}
+                  onChange={(e) => setProfessorFiltro(e.target.value)}
+                >
+                  <option value="todos">Todos</option>
+                  {professoresUnicos.map((prof) => (
+                    <option key={prof} value={prof}>
+                      {prof}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+<br /><hr /><br />
             <ul className="lista-aulas-dia">
-              {aulasDoDia.map((aula) => (
+              {aulasFiltradas.map((aula) => (
                 <li
                   key={aula.id}
                   className="aula-item"
@@ -39,7 +69,10 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, aulasDoDia, onAulaCli
                 </li>
               ))}
             </ul>
-<br /><hr />
+
+            <br />
+            <hr />
+            <br />
             <div className="acoes">
               <button onClick={() => (window.location.href = "/agendar-aula")}>
                 Agendar Aula
@@ -52,7 +85,7 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, aulasDoDia, onAulaCli
         </>
       )}
     </AnimatePresence>,
-    document.body // RENDERIZE DIRETO NO BODY
+    document.body
   );
 }
 
