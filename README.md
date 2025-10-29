@@ -84,17 +84,14 @@ O que já foi feito ✅
 
 
 
-🎯 Melhorias Futuras (Para depois das funcionalidades) (Apenas ideias)
+🎯 Melhorias Futuras (Para depois das funcionalidades) 
 
 -> Calendario
 ✅ Implementar a validação de conflitos de aulas com mesmos professores/horários/alunos   
 ✅ Puxar um modal para a edição de aulas/professores/alunos além de um formulário no final?  
-🎯 Filtro no calendário (Futuro)
+✅ Filtro no calendário (Futuro)
 ✅ Botão para edição ou exclusão de aulas no modal do calendario 
 ✅ Algum botão no calendaio ou perto com link redirecionando para a pagina de agendamento de aulas? 
-🔹 Colocar uma sessão para estatísticas do calendario: nº de aulas por prof/aluno, horários mais ocupados?  talvez 
-🔹 Ver sobre integração com google calendar. talvez
-🔹 Barra de pesquisa para achar aulas/profs/alunos
 
 -> Design
 ✅ Melhorar o design das telas de login e da Home e das listas. 
@@ -103,7 +100,6 @@ O que já foi feito ✅
 
 -> Outros 
 ✅ Animações e transições 
-🔹 Dashboard com info: Proximas aulas, aulas canceladas, estatisticas rápidas (Bem talevz) 
 🔹 ver sobre notificações por whatsapp
 🔹 ver sobre hospedagem 
 ✅ ver sobre a exclusão apos um período de aulas para nao sobrecarregar o banco de dados 
