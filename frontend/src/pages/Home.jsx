@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Calendario from "../components/Calendario"; 
-import logo from "../assets/titulo.png"; 
+import logo from "../assets/titulo_logo.png"; 
 import PageTransition from "../components/animations/PageTransition"; // Importa a animação
 import "./Home.css"; 
 

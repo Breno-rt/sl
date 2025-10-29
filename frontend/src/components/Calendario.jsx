@@ -16,7 +16,6 @@ function Calendario() {
   const [modalAulaAberto, setModalAulaAberto] = useState(false);
   const [modalDiaAberto, setModalDiaAberto] = useState(false);
   const [aulaSelecionada, setAulaSelecionada] = useState(null);
-  const [aulasDoDia, setAulasDoDia] = useState([]);
   const [dataSelecionada, setDataSelecionada] = useState("");
   const navigate = useNavigate();
 
@@ -51,23 +50,12 @@ function Calendario() {
     return () => clearInterval(interval);
   }, []);
 
-  // 📌 Quando clica em um dia, abre o modal com a lista de aulas daquele dia
+  // 📌 Quando clica em um dia, abre o modal
   function handleDayClick(info) {
     if (modalAulaAberto || modalDiaAberto) return;
 
-    const dataClicada = format(info.date, "yyyy-MM-dd");
-    const aulasFiltradas = aulas.filter(
-      (aula) => format(new Date(aula.start), "yyyy-MM-dd") === dataClicada
-    );
-
-    const aulasOrdenadas = aulasFiltradas.sort((a, b) => {
-      const horarioA = a.extendedProps.horario;
-      const horarioB = b.extendedProps.horario;
-      return horarioA.localeCompare(horarioB);
-    });
-
+    // ✅ AGORA É SIMPLES - só passa a data
     setDataSelecionada(format(info.date, "dd/MM/yyyy", { locale: ptBR }));
-    setAulasDoDia(aulasOrdenadas);
     setModalDiaAberto(true);
   }
 
@@ -87,17 +75,16 @@ function Calendario() {
     }, 300);
   }
 
-const handleExcluirAula = async (id) => {
-  try {
-    await api.delete(`/aulas/${id}`);
-    setAulas(aulas.filter((aula) => aula.id !== id));
-    setModalAulaAberto(false);
-  } catch (error) {
-    alert("Erro ao excluir aula!");
-    console.error(error);
-  }
-};
-
+  const handleExcluirAula = async (id) => {
+    try {
+      await api.delete(`/aulas/${id}`);
+      setAulas(aulas.filter((aula) => aula.id !== id));
+      setModalAulaAberto(false);
+    } catch (error) {
+      alert("Erro ao excluir aula!");
+      console.error(error);
+    }
+  };
 
   const handleEditarAula = (id) => {
     navigate(`/editar-aula/${id}`);
@@ -163,13 +150,13 @@ const handleExcluirAula = async (id) => {
         />
       </div>
 
-      {/* Modal de aulas do dia */}
+      {/* ✅ Modal de aulas do dia - ATUALIZADO */}
       <ModalAulasDia
         isOpen={modalDiaAberto}
         onClose={() => setModalDiaAberto(false)}
         dataSelecionada={dataSelecionada}
-        aulasDoDia={aulasDoDia}
         onAulaClick={handleAulaClick}
+        aulas={aulas} // ✅ Agora passa todas as aulas
       />
 
       {/* Modal de detalhes da aula */}

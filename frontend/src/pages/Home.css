@@ -3,7 +3,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: var(--fundo-escuro);
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(5px);
     color: var(--texto-claro);
     width: 100vw;
     height: 100vh;
@@ -16,13 +17,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--fundo-cinza);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative; /* Para centralizar o título */
   }
   
   .logo {
-    width: 200px; /* Ajuste o tamanho conforme necessário */
+    width: 70px; /* Ajuste o tamanho conforme necessário */
     height: auto;
   }
   
@@ -55,7 +55,6 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    background-color: var(--fundo-cinza);
   }
   
   .management-button {
@@ -80,7 +79,6 @@
   .calendar-container {
     flex: 1;
     padding: 20px;
-    background-color: var(--fundo-cinza);
     overflow-y: auto;
   }
   

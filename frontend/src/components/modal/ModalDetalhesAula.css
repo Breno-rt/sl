@@ -2,13 +2,14 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 999;
 }
 
 .modaldetalhes {
   position: fixed;
   transform: translate(-50%, -50%);
-  background: #222;
+  background: rgba(30, 30, 30, 0.9);
   color: #fff;
   border-radius: 12px;
   padding: 20px;
