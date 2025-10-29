@@ -59,7 +59,7 @@
   
   .management-button {
     padding: 10px 30px;
-    background-color: var(--fundo-cinza);
+    background-color: rgba(30, 30, 30, 0.5);
     color: var(--texto-claro);
     border: 2px solid var(--azul-primario);
     border-radius: 10px;
