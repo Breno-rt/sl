@@ -171,10 +171,16 @@ O que já foi feito ✅
 
 - 29/10 -> Remoção variáveis de ambiente da futura atualização com whatsapp API ✅
 
+- 29/10 pt2 -> Atualização Geral front e back + correções ✅
+
+- 31/10 -> Dashboard de aulas (fase de teste ainda) / modais comentados caso quisermos retornar ✅
+
+- 03/11 -> Correção redirecionamento após agendamento/edição de aulas ✅
+
 
 🔹 Próximo
 
-- KPI's no lugar da lista de aulas 
+- KPI's no lugar da lista de aulas (em andamento/testes) 
 
 - api para mensagens whatsapp 
 
