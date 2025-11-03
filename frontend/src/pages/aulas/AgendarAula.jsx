@@ -69,7 +69,7 @@ function AgendarAula() {
   const fecharModal = () => {
     setModalAberto(false);
     if (modalTipo === "sucesso") {
-      navigate("/aulas"); // Redireciona para a lista de aulas após sucesso
+      navigate("/"); // Redireciona para a home após sucesso
     }
   };
 
@@ -84,6 +84,7 @@ function AgendarAula() {
             <option value="">Selecione uma matéria</option>
             <option value="Inglês">Inglês</option>
             <option value="Francês">Francês</option>
+            <option value="Espanhol">Espanhol</option>
           </select>
         </div>
 

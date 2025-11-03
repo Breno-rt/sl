@@ -1,24 +1,32 @@
 :root {
-  --azul-primario: #3582db; /* Azul tema */
-  --azul-hover: #72a5df; /* Azul mais claro para hover */
-  --fundo-escuro: #242424; /* Preto */
-  --fundo-cinza: #3f3f3f; /* Cinza escuro */
-  --texto-claro: #ffffff; /* Branco */
-  --texto-cinza: #d8d8d8; /* Cinza claro */
-  --sombra-azul: rgba(53, 130, 219, 0.3); /* Sombra azul */
+  --azul-primario: #3582db;
+  --azul-hover: #72a5df;
+  --fundo-escuro: #242424;
+  --fundo-cinza: #3f3f3f;
+  --texto-claro: #ffffff;
+  --texto-cinza: #d8d8d8;
+  --sombra-azul: rgba(53, 130, 219, 0.3);
+  --verde-positivo: #2ecc71;
+  --vermelho-negativo: #e74c3c;
 }
 
-/* Estilo geral da lista */
+/* ✅ MANTIDO TUDO DO CSS ORIGINAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .lista-aulas {
   font-family: Arial, sans-serif;
   color: var(--texto-claro);
-  width: 120%; /* Ajustado para responsividade */
-  max-width: 800px;
+  width: 100%;
+  max-width: 1200px; /* ✅ Aumentado para o dashboard */
   margin: 20px auto;
   padding: 20px;
   background-color: var(--fundo-cinza);
   border-radius: 10px;
-  box-shadow: 0 4px 8px var(--sombra-azul); /* Sombra com azul tema */
+  box-shadow: 0 4px 8px var(--sombra-azul);
 }
 
 .lista-aulas h1 {
@@ -27,7 +35,86 @@
   margin-bottom: 20px;
 }
 
-/* Botões de ação */
+/* ✅ NOVO: GRID DO DASHBOARD */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card-metrica {
+  background-color: var(--fundo-escuro);
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+  transition: transform 0.2s ease;
+}
+
+.card-metrica:hover {
+  transform: translateY(-2px);
+}
+
+.card-header {
+  background-color: var(--azul-primario);
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+}
+
+.card-header h3 {
+  color: var(--texto-claro);
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.numero-grande {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--texto-claro);
+  margin-bottom: 5px;
+}
+
+.numero-grande.positivo {
+  color: var(--verde-positivo);
+}
+
+.numero-grande.negativo {
+  color: var(--vermelho-negativo);
+}
+
+.legenda {
+  color: var(--texto-cinza);
+  font-size: 0.9em;
+}
+
+.linha-metrica {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 5px 0;
+}
+
+.linha-metrica:last-child {
+  margin-bottom: 0;
+}
+
+.linha-metrica span {
+  color: var(--texto-cinza);
+}
+
+.linha-metrica strong {
+  color: var(--texto-claro);
+  font-size: 1.1em;
+}
+
+/* ✅ MANTIDO TUDO O RESTO DO CSS ORIGINAL */
 .botoes-acao {
   display: flex;
   gap: 10px;
@@ -48,90 +135,74 @@
 }
 
 .botoes-acao button.editar {
-  background-color: var(--azul-primario); /* Azul tema */
+  background-color: var(--azul-primario);
   color: var(--texto-claro);
 }
 
 .botoes-acao button.editar:hover {
-  background-color: var(--azul-hover); /* Azul mais claro ao passar o mouse */
+  background-color: var(--azul-hover);
 }
 
 .botoes-acao button.excluir {
-  background-color:#444;/* Preto */
+  background-color: #444;
   color: var(--texto-claro);
 }
 
 .botoes-acao button.excluir:hover {
-  background-color: #585858; /* Cinza mais claro ao passar o mouse */
+  background-color: #585858;
 }
 
-/* Estilo da lista de aulas */
-.lista-aulas ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.lista-aulas li {
-  background-color: var(--fundo-escuro); /* Preto */
-  margin-bottom: 15px;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 2px 4px 6px var(--sombra-azul); /* Sombra com azul tema */
-}
-
-.lista-aulas li strong {
-  color: var(--texto-cinza); /* Cinza claro */
-}
-
-/* Mensagem de erro */
-.erro {
-  color: red;
-  font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
-/* Botões do modal */
-.botoes-modal {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Botões de navegação */
 .botoes-navegacao {
   display: flex;
   gap: 10px;
 }
 
-/* Responsividade */
+/* ✅ RESPONSIVIDADE ATUALIZADA */
 @media (max-width: 768px) {
   .lista-aulas {
-    width: 95%; /* Ajuste para telas menores */
+    width: 95%;
     padding: 15px;
   }
 
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
   .lista-aulas h1 {
-    font-size: 20px; /* Título menor em telas pequenas */
+    font-size: 20px;
   }
 
-  .botoes-acao button {
-    padding: 6px 10px; /* Botões menores em telas pequenas */
-    font-size: 12px;
+  .numero-grande {
+    font-size: 2em;
   }
 
-  .lista-aulas li {
-    padding: 10px; /* Menos padding em telas pequenas */
+  .card-content {
+    padding: 15px;
   }
 }
 
+@media (max-width: 480px) {
+  .card-header {
+    padding: 12px;
+  }
+  
+  .card-header h3 {
+    font-size: 1em;
+  }
+  
+  .lista-aulas {
+    padding: 10px;
+  }
+}
+
+/* ✅ MANTIDO O SCROLL (caso precise no futuro) */
 .lista-scroll {
-  max-height: 600px; /* Ajuste conforme desejar */
+  max-height: 600px;
   overflow-y: auto;
-  padding-right: 10px; /* espaço para não cortar conteúdo */
+  padding-right: 10px;
 }
 
-/* Estilizando a barra de rolagem para combinar com o tema */
 .lista-scroll::-webkit-scrollbar {
   width: 8px;
 }

@@ -71,7 +71,7 @@ function EditarAula() {
   const fecharModal = () => {
     setModalAberto(false);
     if (modalMensagem === "✅ Aula editada com sucesso!") {
-      navigate("/aulas");
+      navigate("/");
     }
   };
 
