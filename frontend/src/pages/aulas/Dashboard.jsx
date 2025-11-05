@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; 
 import api from "../../services/api";
-import "./ListaAulas.css";
+import "./Dashboard.css";
 import FadeContainer from "../../components/animations/FadeContainer";
 
 function ListaAulas() {

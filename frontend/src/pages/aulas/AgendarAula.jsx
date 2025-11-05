@@ -120,7 +120,7 @@ function AgendarAula() {
     
         <div className="botoes-aluno">
           <button className="agendar" type="submit">Agendar Aula</button>
-        <Link to="/aulas">
+        <Link to="/">
           <button className="cancelar">Voltar</button>
         </Link>
         </div>

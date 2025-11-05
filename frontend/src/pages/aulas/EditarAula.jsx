@@ -109,7 +109,7 @@ function EditarAula() {
 
           <div className="botoes-edicao">
             <button type="submit">Salvar</button>
-            <button type="button" onClick={() => navigate("/aulas")}>Cancelar</button>
+            <button type="button" onClick={() => navigate("/")}>Cancelar</button>
           </div>
         </form>
 

@@ -29,7 +29,7 @@ function Home() {
           <Link to="/usuarios" className="management-button">Usuários</Link>
           <Link to="/professores" className="management-button">Professores</Link>
           <Link to="/alunos" className="management-button">Alunos</Link>
-          <Link to="/aulas" className="management-button">Aulas</Link>
+          <Link to="/aulas" className="management-button">Dashboard</Link>
         </div>
 
         {/* Calendário */}
