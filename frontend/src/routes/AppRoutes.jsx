@@ -11,7 +11,7 @@ import EditarProfessor from "../pages/professores/EditarProfessor";
 import ListaAlunos from "../pages/alunos/ListaAlunos";
 import CadastrarAluno from "../pages/alunos/CadastrarAluno";
 import EditarAluno from "../pages/alunos/EditarAluno"; 
-import ListaAulas from "../pages/aulas/ListaAulas";
+import Dashboard from "../pages/aulas/Dashboard";
 import AgendarAula from "../pages/aulas/AgendarAula";
 import EditarAula from "../pages/aulas/EditarAula";
 import EsqueciSenha from "../pages/usuarios/EsqueciSenha";
@@ -41,7 +41,7 @@ function AppRoutes() {
         <Route path="/cadastrar-aluno" element={<PrivateRoute><CadastrarAluno /></PrivateRoute>} />
         <Route path="/editar-aluno/:id" element={<PrivateRoute><EditarAluno /></PrivateRoute>} /> 
 
-        <Route path="/aulas" element={<PrivateRoute><ListaAulas /></PrivateRoute>} />
+        <Route path="/aulas" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/agendar-aula" element={<PrivateRoute><AgendarAula /></PrivateRoute>} />
         <Route path="/editar-aula/:id" element={<PrivateRoute><EditarAula /></PrivateRoute>} />
       </Routes>
