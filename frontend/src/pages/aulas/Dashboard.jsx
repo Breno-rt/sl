@@ -136,7 +136,7 @@ function ListaAulas() {
               <div className="card-content">
                 {Object.entries(aulasPorMateria).map(([materia, quantidade]) => (
                   <div key={materia} className="linha-metrica">
-                    <span>{materia}:</span>
+                    <span>{materia}</span>
                     <strong>{quantidade}</strong>
                   </div>
                 ))}
@@ -154,7 +154,7 @@ function ListaAulas() {
                   .slice(0, 3)
                   .map(([professor, quantidade]) => (
                     <div key={professor} className="linha-metrica">
-                      <span>{professor}:</span>
+                      <span>{professor}</span>
                       <strong>{quantidade}</strong>
                     </div>
                   ))
@@ -170,7 +170,7 @@ function ListaAulas() {
               <div className="card-content">
                 {diasMaisAulas.map(([dia, quantidade]) => (
                   <div key={dia} className="linha-metrica">
-                    <span>{dia}:</span>
+                    <span>{dia}</span>
                     <strong>{quantidade}</strong>
                   </div>
                 ))}
@@ -184,15 +184,15 @@ function ListaAulas() {
               </div>
               <div className="card-content">
                 <div className="linha-metrica">
-                  <span>Manhã:</span>
+                  <span>Manhã</span>
                   <strong>{horarios.manha}</strong>
                 </div>
                 <div className="linha-metrica">
-                  <span>Tarde:</span>
+                  <span>Tarde</span>
                   <strong>{horarios.tarde}</strong>
                 </div>
                 <div className="linha-metrica">
-                  <span>Noite:</span>
+                  <span>Noite</span>
                   <strong>{horarios.noite}</strong>
                 </div>
               </div>
