@@ -9,7 +9,7 @@
 .modaldetalhes {
   position: fixed;
   transform: translate(-50%, -50%);
-  background: rgba(30, 30, 30, 0.9);
+  background: rgb(22, 22, 22);
   color: #fff;
   border-radius: 12px;
   padding: 20px;
