@@ -27,7 +27,7 @@ export const recuperarSenha = async (req, res) => {
       },
     });
 
-    const link = `http://localhost:5173/usuarios/trocar-senha/${token}`;
+    const link = `${process.env.FRONTEND_URL}/usuarios/trocar-senha/${token}`;
     const mensagem = `
       Olá ${usuario.nome},
 
@@ -52,9 +52,12 @@ export const recuperarSenha = async (req, res) => {
   }
 };
 
-export const redefinirSenha = async (req, res) => {
+
+  export const redefinirSenha = async (req, res) => {
   const { token } = req.params;
   const { novaSenha } = req.body;
+
+  console.log("🔥 TOKEN RECEBIDO NO BACKEND:", token);
 
   try {
     const usuario = await prisma.usuario.findFirst({
@@ -65,6 +68,7 @@ export const redefinirSenha = async (req, res) => {
     });
 
     if (!usuario) {
+      console.log("❌ Token não encontrado no banco OU expirado");
       return res.status(400).json({ mensagem: 'Token inválido ou expirado' });
     }
 
@@ -85,3 +89,5 @@ export const redefinirSenha = async (req, res) => {
     res.status(500).json({ mensagem: 'Erro ao redefinir senha' });
   }
 };
+
+
