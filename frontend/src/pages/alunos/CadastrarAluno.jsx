@@ -111,6 +111,14 @@ function CadastrarAluno() {
               />{" "}
               Francês
             </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Espanhol"
+                onChange={handleMateriaChange}
+              />{" "}
+              Espanhol
+            </label>
           </div>
 
           <div className="botoes-aluno">

@@ -98,6 +98,7 @@ function CadastrarProfessor() {
           <label htmlFor="Matéria">Matéria: </label>
           <label><input type="checkbox" value="Inglês" onChange={handleMateriaChange} />Inglês </label>
           <label><input type="checkbox" value="Francês" onChange={handleMateriaChange} />Francês </label>
+          <label><input type="checkbox" value="Espanhol" onChange={handleMateriaChange} />Espanhol </label>
         </div>
 
       <div className="botoes-professor">
