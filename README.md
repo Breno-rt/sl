@@ -1,6 +1,30 @@
+# 🗂️ Société de Langues — Sistema de Agendamento
+
+Sistema completo para gerenciamento de professores, alunos e aulas, desenvolvido para apoiar o projeto *Société de Langues*, com funcionalidades de agendamento, edição, notificações por e-mail/WhatsApp, calendário e dashboard.
+
+---
+
+ Tecnologias Utilizadas
+
+  Backend
+- Node.js  
+- Express  
+- Prisma ORM  
+- MongoDB Atlas  
+- JWT (Autenticação)  
+- Nodemailer (E-mail)  
+- Twilio (WhatsApp – em teste)  
+
+  Frontend
+- React + Vite  
+- React Router  
+- Axios  
+- CSS modular / Tema próprio  
+- Framer Motion (animações)  
+- FullCalendar / react-calendar  
 
 
---------------------------------------------------------------Backend básico ----------------------------------------------------------------
+**Backend básico** 
 
 - Estrutura básica (Ideia)
 
@@ -25,7 +49,8 @@ Dia 14/02  -> Métodos do CRUD alunos funcionando
 
 Dia 18/02  -> Métodos do CRUD Aulas funcionando
 
-----------------------------------------------------------------Frontend básico --------------------------------------------------------------
+
+**Frontend básico**
 
 Dia 22/02  -> Inicio frontend
 
@@ -49,13 +74,15 @@ Dia 22/02  -> Inicio frontend
 
 25/02 -> Finalizando frontend básico
 
------------------------------------------------------------- Validação ----------------------------------------------------------------------
+
+**Validação** 
 
 26/02 -> Validação com usuários e login funcionando no thunder (so backedn no momento), duração do token gerado: 1h
 
 01/03 ->  api - backend totalmente funcional
 
------------------------------------------------------------Resumo até agr --------------------------------------------------------------------
+
+**Resumo até agr** 
 
 O que já foi feito ✅
 
@@ -107,7 +134,7 @@ O que já foi feito ✅
 
 
 
----------------------------------------------------------------- CONTINUAÇÃO ---------------------------------------------------------------
+**CONTINUAÇÃO Diário** 
 
 - 04/03 -> Botão de exclusão para profs/alunos/aulas - ✅
 
