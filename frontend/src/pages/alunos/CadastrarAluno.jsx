@@ -122,9 +122,7 @@ function CadastrarAluno() {
           </div>
 
           <div className="botoes-aluno">
-            <button className="cadastrar" type="submit">
-              Cadastrar
-            </button>
+            <button className="cadastrar" type="submit">Cadastrar</button>
             <Link to="/alunos">
               <button className="cancelar">Cancelar</button>
             </Link>
