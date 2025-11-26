@@ -210,6 +210,8 @@ O que já foi feito ✅
 
 - 24/11 -> Correção ModalDetalhesAula.jsx/.css, correção estrutural no jsx e estética no css e no Home.css do erro ✅
 
+- 25/11 -> preparação para hospedagem pronta
+
 
 🔹 Próximo
 
