@@ -18,6 +18,12 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, onAulaClick, aulas })
     }
   }, [isOpen, dataSelecionada]);
 
+  // ✅ Resetar filtro sempre que o usuário mudar o dia
+useEffect(() => {
+  setProfessorFiltro("todos");
+}, [dataAtual]);
+
+
   // ✅ NAVEGAÇÃO ENTRE DIAS
   const avancarDia = () => {
     setDataAtual(prev => addDays(prev, 1));
@@ -27,7 +33,7 @@ function ModalAulasDia({ isOpen, onClose, dataSelecionada, onAulaClick, aulas })
     setDataAtual(prev => subDays(prev, 1));
   };
 
-  // ✅ FORMATA DATA PARA EXIBIÇÃO (Segunda-feira, 15 de Março de 2024)
+  // ✅ FORMATA DATA PARA EXIBIÇÃO ( EX: Segunda-feira, 15 de Março de 2024)
   const formatarDataExtenso = (data) => {
     return format(data, "EEEE, dd 'de' MMMM 'de' yyyy", { locale: ptBR });
   };
