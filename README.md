@@ -214,11 +214,13 @@ O que já foi feito ✅
 
 - 26/11 -> remoção envio de emails (pedido do cliente) para ano que vem colcoar envio por whatsapp ✅
 
+- 01/12 -> KPI's no lugar da lista de aulas (Aprovado pelos professores) ✅
+
+- 03/12 -> Correção reset do filtro no modal 1 da lista de aulas ✅
+
 
 🔹 Próximo
 
-- KPI's no lugar da lista de aulas (em andamento/testes) 
+- api para mensagens whatsapp (Em verificação pelo meta)
 
-- api para mensagens whatsapp 
-
-- Hospedar 
+- Aumentar poder de CPU no render 
