@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
 
-// Importando os novos modais
+// Importando modais
 import ModalAulasDia from "./modal/ModalAulasDia";
 import ModalDetalhesAula from "./modal/ModalDetalhesAula";
 
@@ -54,7 +54,6 @@ function Calendario() {
   function handleDayClick(info) {
     if (modalAulaAberto || modalDiaAberto) return;
 
-    // ✅ AGORA É SIMPLES - só passa a data
     setDataSelecionada(format(info.date, "dd/MM/yyyy", { locale: ptBR }));
     setModalDiaAberto(true);
   }
