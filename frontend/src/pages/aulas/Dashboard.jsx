@@ -4,6 +4,11 @@ import api from "../../services/api";
 import "./Dashboard.css";
 import FadeContainer from "../../components/animations/FadeContainer";
 
+// 🔧 Função para corrigir datas do Mongo (evita UTC)
+function normalizarData(dataString) {
+  return new Date(dataString + "T00:00:00");
+}
+
 function ListaAulas() {
   const [aulas, setAulas] = useState([]);
 
@@ -22,21 +27,24 @@ function ListaAulas() {
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ CALCULAR MÉTRICAS (MANTIDO IGUAL)
+  // =============================================
+  // 🔥 USAR DATA NORMALIZADA AQUI
+  // =============================================
+
   const hoje = new Date();
   const mesAtual = hoje.getMonth();
   const anoAtual = hoje.getFullYear();
 
   // Aulas deste mês
   const aulasEsteMes = aulas.filter(aula => {
-    const dataAula = new Date(aula.data);
+    const dataAula = normalizarData(aula.data);
     return dataAula.getMonth() === mesAtual && 
            dataAula.getFullYear() === anoAtual;
   });
 
   // Aulas do mês anterior
   const aulasMesAnterior = aulas.filter(aula => {
-    const dataAula = new Date(aula.data);
+    const dataAula = normalizarData(aula.data);
     const mesAnterior = mesAtual === 0 ? 11 : mesAtual - 1;
     const anoMesAnterior = mesAtual === 0 ? anoAtual - 1 : anoAtual;
     
@@ -66,7 +74,7 @@ function ListaAulas() {
   // Dias com mais aulas
   const aulasPorDia = {};
   aulasEsteMes.forEach(aula => {
-    const dia = new Date(aula.data).toLocaleDateString('pt-BR', { weekday: 'long' });
+    const dia = normalizarData(aula.data).toLocaleDateString('pt-BR', { weekday: 'long' });
     aulasPorDia[dia] = (aulasPorDia[dia] || 0) + 1;
   });
   
@@ -83,14 +91,11 @@ function ListaAulas() {
     else horarios.noite++;
   });
 
-
   return (
     <FadeContainer>
       <div className="lista-aulas">
-        {/* ✅ TÍTULO ATUALIZADO */}
         <h1>Dashboard de Aulas No Mês</h1>
 
-        {/* ✅ BOTÕES DE NAVEGAÇÃO (MANTIDOS) */}
         <div className="botoes-navegacao">
           <Link to="/agendar-aula">
             <button>Agendar Nova Aula</button>
@@ -101,10 +106,9 @@ function ListaAulas() {
         </div>
         <br />
 
-        {/* ✅ DASHBOARD COM MÉTRICAS */}
         {aulas.length > 0 ? (
           <div className="dashboard-grid">
-            {/* CARD 1: AULAS ESTE MÊS */}
+
             <div className="card-metrica">
               <div className="card-header">
                 <h3>📅 Este Mês</h3>
@@ -115,7 +119,6 @@ function ListaAulas() {
               </div>
             </div>
 
-            {/* CARD 2: COMPARATIVO */}
             <div className="card-metrica">
               <div className="card-header">
                 <h3>📈 Comparativo</h3>
@@ -128,7 +131,6 @@ function ListaAulas() {
               </div>
             </div>
 
-            {/* CARD 3: MATÉRIAS */}
             <div className="card-metrica">
               <div className="card-header">
                 <h3>📚 Matérias</h3>
@@ -143,7 +145,6 @@ function ListaAulas() {
               </div>
             </div>
 
-            {/* CARD 4: PROFESSORES */}
             <div className="card-metrica">
               <div className="card-header">
                 <h3>👨‍🏫 Professores</h3>
@@ -162,7 +163,6 @@ function ListaAulas() {
               </div>
             </div>
 
-            {/* CARD 5: DIAS POPULARES */}
             <div className="card-metrica">
               <div className="card-header">
                 <h3>🗓️ Dias Com Mais Aulas</h3>
@@ -177,7 +177,6 @@ function ListaAulas() {
               </div>
             </div>
 
-            {/* CARD 6: HORÁRIOS */}
             <div className="card-metrica">
               <div className="card-header">
                 <h3>⏰ Horários</h3>
@@ -197,6 +196,7 @@ function ListaAulas() {
                 </div>
               </div>
             </div>
+
           </div>
         ) : (
           <p>❌ Nenhuma aula agendada.</p>
