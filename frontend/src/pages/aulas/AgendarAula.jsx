@@ -1,142 +1,200 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../services/api";
-import "./AgendarAula.css"
+import "./AgendarAula.css";
 import FadeContainer from "../../components/animations/FadeContainer";
-import ConfirmModal from "../../components/modal/ConfirmModal"; 
-
+import ConfirmModal from "../../components/modal/ConfirmModal";
 
 function AgendarAula() {
   const [materia, setMateria] = useState("");
+  const [tipo, setTipo] = useState(""); // aluno | turma
+
   const [professores, setProfessores] = useState([]);
   const [alunos, setAlunos] = useState([]);
+  const [turmas, setTurmas] = useState([]);
+
   const [professorId, setProfessorId] = useState("");
   const [alunoId, setAlunoId] = useState("");
+  const [turmaId, setTurmaId] = useState("");
+
   const [data, setData] = useState("");
   const [horario, setHorario] = useState("");
-  const [modalAberto, setModalAberto] = useState(false); // Estado para controlar o modal
-  const [modalMensagem, setModalMensagem] = useState(""); // Mensagem do modal
-  const [modalTipo, setModalTipo] = useState(""); // Tipo do modal (sucesso, erro, etc.)
+
+  const [modalAberto, setModalAberto] = useState(false);
+  const [modalMensagem, setModalMensagem] = useState("");
+  const [modalTipo, setModalTipo] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchDados() {
       try {
-        const responseProfessores = await api.get("/professores");
-        const responseAlunos = await api.get("/alunos");
+        const [resProf, resAlunos, resTurmas] = await Promise.all([
+          api.get("/professores"),
+          api.get("/alunos"),
+          api.get("/turmas"),
+        ]);
 
-        setProfessores(responseProfessores.data);
-        setAlunos(responseAlunos.data);
+        setProfessores(resProf.data);
+        setAlunos(resAlunos.data);
+        setTurmas(resTurmas.data);
       } catch (error) {
-        console.error("Erro ao buscar professores e alunos", error);
+        console.error("Erro ao buscar dados", error);
       }
     }
     fetchDados();
   }, []);
 
-  // Filtra professores e alunos que tenham a matéria selecionada no array de matérias deles
-  const professoresFiltrados = professores.filter((prof) => prof.materia.includes(materia));
-  const alunosFiltrados = alunos.filter((aluno) => aluno.materia.includes(materia));
+  const professoresFiltrados = professores.filter((p) =>
+    p.materia.includes(materia)
+  );
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  const alunosFiltrados = alunos.filter((a) =>
+    a.materia.includes(materia)
+  );
 
-    if (!materia || !professorId || !alunoId || !data || !horario) {
-      setModalMensagem("Por favor, preencha todos os campos!");
+  const turmasFiltradas = turmas.filter(
+    (t) => t.materia === materia
+  );
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!materia || !professorId || !tipo || !data || !horario) {
+      setModalMensagem("Preencha todos os campos!");
+      setModalTipo("erro");
+      setModalAberto(true);
+      return;
+    }
+
+    if (tipo === "aluno" && !alunoId) {
+      setModalMensagem("Selecione um aluno.");
+      setModalTipo("erro");
+      setModalAberto(true);
+      return;
+    }
+
+    if (tipo === "turma" && !turmaId) {
+      setModalMensagem("Selecione uma turma.");
       setModalTipo("erro");
       setModalAberto(true);
       return;
     }
 
     try {
-      // Envia a data no formato YYYY-MM-DD e o horário no formato HH:mm
-      await api.post("/aulas", { professorId, alunoId, data, horario, materia });
+      await api.post("/aulas", {
+        professorId,
+        data,
+        horario,
+        materia,
+        alunoId: tipo === "aluno" ? alunoId : undefined,
+        turmaId: tipo === "turma" ? turmaId : undefined,
+      });
+
       setModalMensagem("Aula agendada com sucesso!");
       setModalTipo("sucesso");
       setModalAberto(true);
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setModalMensagem(error.response.data.error); // Exibe a mensagem de erro do backend
-      } else {
-        setModalMensagem("Erro ao agendar aula.");
-      }
+      setModalMensagem(
+        error.response?.data?.error || "Erro ao agendar aula."
+      );
       setModalTipo("erro");
       setModalAberto(true);
-      console.error(error);
     }
   }
 
   const fecharModal = () => {
     setModalAberto(false);
     if (modalTipo === "sucesso") {
-      navigate("/"); // Redireciona para a home após sucesso
+      navigate("/");
     }
   };
 
   return (
     <FadeContainer>
       <div className="agendar-aula">
-      <h1>Agendar Aula</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="materia">Matéria: </label>
-          <select id="materia" value={materia} onChange={(e) => setMateria(e.target.value)} required>
-            <option value="">Selecione uma matéria</option>
+        <h1>Agendar Aula</h1>
+
+        <form onSubmit={handleSubmit}>
+          <label>Matéria:</label>
+          <select value={materia} onChange={(e) => setMateria(e.target.value)}>
+            <option value="">Selecione</option>
             <option value="Inglês">Inglês</option>
             <option value="Francês">Francês</option>
             <option value="Espanhol">Espanhol</option>
           </select>
-        </div>
 
-        <div>
-          <label htmlFor="professor">Professor: </label>
-          <select id="professor" value={professorId} onChange={(e) => setProfessorId(e.target.value)} required disabled={!materia}>
-            <option value="">Selecione um professor</option>
-            {professoresFiltrados.map((prof) => (
-              <option key={prof.id} value={prof.id}>{prof.nome}</option>
+          <label>Professor:</label>
+          <select
+            value={professorId}
+            onChange={(e) => setProfessorId(e.target.value)}
+            disabled={!materia}
+          >
+            <option value="">Selecione</option>
+            {professoresFiltrados.map((p) => (
+              <option key={p.id} value={p.id}>{p.nome}</option>
             ))}
           </select>
-        </div>
 
-        <div>
-          <label htmlFor="aluno">Aluno: </label>
-          <select id="aluno" value={alunoId} onChange={(e) => setAlunoId(e.target.value)} required disabled={!materia}>
-            <option value="">Selecione um aluno</option>
-            {alunosFiltrados.map((aluno) => (
-              <option key={aluno.id} value={aluno.id}>{aluno.nome}</option>
-            ))}
+          <label>Tipo de Aula:</label>
+          <select
+            value={tipo}
+            onChange={(e) => {
+              setTipo(e.target.value);
+              setAlunoId("");
+              setTurmaId("");
+            }}
+            disabled={!materia}
+          >
+            <option value="">Selecione</option>
+            <option value="aluno">Aluno</option>
+            <option value="turma">Turma</option>
           </select>
-        </div>
 
-        <div>
-          <label htmlFor="data">Data: </label>
-          <input type="date" id="data" value={data} onChange={(e) => setData(e.target.value)} required />
-        </div>
+          {tipo === "aluno" && (
+            <>
+              <label>Aluno:</label>
+              <select value={alunoId} onChange={(e) => setAlunoId(e.target.value)}>
+                <option value="">Selecione</option>
+                {alunosFiltrados.map((a) => (
+                  <option key={a.id} value={a.id}>{a.nome}</option>
+                ))}
+              </select>
+            </>
+          )}
 
-        <div>
-          <label htmlFor="horario">Horário: </label>
-          <input type="time" id="horario" value={horario} onChange={(e) => setHorario(e.target.value)} required />
-        </div>
-    
-        <div className="botoes-aluno">
-          <button className="agendar" type="submit">Agendar Aula</button>
-        <Link to="/">
-          <button className="cancelar">Voltar</button>
-        </Link>
-        </div>
+          {tipo === "turma" && (
+            <>
+              <label>Turma:</label>
+              <select value={turmaId} onChange={(e) => setTurmaId(e.target.value)}>
+                <option value="">Selecione</option>
+                {turmasFiltradas.map((t) => (
+                  <option key={t.id} value={t.id}>{t.nome}</option>
+                ))}
+              </select>
+            </>
+          )}
 
-      </form>
+          <label>Data:</label>
+          <input type="date" value={data} onChange={(e) => setData(e.target.value)} />
 
-      {/* Modal para exibir mensagens */}
+          <label>Horário:</label>
+          <input type="time" value={horario} onChange={(e) => setHorario(e.target.value)} />
+
+          <div className="botoes-aluno">
+            <button className="agendar">Agendar Aula</button>
+            <Link to="/"><button type="button" className="cancelar">Voltar</button></Link>
+          </div>
+        </form>
+
         <ConfirmModal
           isOpen={modalAberto}
           message={modalMensagem}
           onConfirm={fecharModal}
           confirmText="OK"
         />
-    </div>
+      </div>
     </FadeContainer>
-    
   );
 }
 

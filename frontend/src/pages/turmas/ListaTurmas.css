@@ -1,0 +1,235 @@
+:root {
+  --azul-primario: #3582db;
+  --azul-hover: #72a5df;
+  --fundo-escuro: #242424;
+  --fundo-cinza: #3f3f3f;
+  --texto-claro: #ffffff;
+  --texto-cinza: #d8d8d8;
+  --sombra-azul: rgba(53, 130, 219, 0.3);
+  --sombra-vermelha: rgba(231, 76, 60, 0.3);
+  --vermelho-primario: rgb(209, 45, 45);
+  --vermelho-hover: rgb(175, 74, 74);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CONTAINER PRINCIPAL  */
+
+.lista-turmas {
+  font-family: Arial, sans-serif;
+  color: var(--texto-claro);
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+}
+
+.lista-turmas h1 {
+  text-align: center;
+  color: var(--texto-claro);
+  margin-bottom: 20px;
+}
+
+/*  GRID DAS MATÉRIAS  */
+
+.containers-materias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/*  CONTAINER INDIVIDUAL*/
+
+.container-materia {
+  background-color: var(--fundo-escuro);
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CORES DO HEADER */
+
+.container-materia.ingles .header-materia {
+  background-color: var(--azul-primario);
+}
+
+.container-materia.frances .header-materia {
+  background-color: var(--azul-primario);
+}
+
+.container-materia.espanhol .header-materia {
+  background-color: var(--azul-primario);
+}
+
+.header-materia {
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.header-materia h2 {
+  color: var(--texto-claro);
+  margin: 0;
+  font-size: 1.2em;
+}
+
+/*  LISTA INTERNA COM SCROLL */
+
+.lista-scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+  flex-grow: 1;
+}
+
+.lista-scroll ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lista-turmas li {
+  background-color: var(--fundo-escuro);
+  margin: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.lista-turmas li strong {
+  color: var(--texto-cinza);
+}
+
+/* BOTÕES  */
+
+.botoes-acao {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botoes-acao button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.botoes-acao button:hover {
+  opacity: 0.9;
+}
+
+.botoes-acao button.editar {
+  background-color: var(--azul-primario);
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.editar:hover {
+  background-color: var(--azul-hover);
+}
+
+.botoes-acao button.excluir {
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+}
+
+.botoes-acao button.excluir:hover {
+  background-color: #444;
+}
+
+/* BOTÕES DE NAVEGAÇÃO  */
+
+.botoes-navegacao {
+  display: flex;
+  gap: 10px;
+}
+
+/* SCROLLBAR */
+
+.lista-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--azul-primario);
+  border-radius: 4px;
+}
+
+.lista-scroll::-webkit-scrollbar-track {
+  background: var(--fundo-cinza);
+}
+
+/* RESPONSIVIDADE*/ 
+
+@media (max-width: 1200px) {
+  .containers-materias {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .containers-materias {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .container-materia {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-turmas {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .lista-turmas h1 {
+    font-size: 20px;
+  }
+
+  .botoes-acao button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .lista-turmas li {
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .header-materia h2 {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-materia {
+    padding: 12px;
+  }
+  
+  .header-materia h2 {
+    font-size: 1em;
+  }
+  
+  .lista-scroll {
+    max-height: 400px;
+  }
+  
+  .lista-turmas {
+    padding: 10px;
+  }
+}

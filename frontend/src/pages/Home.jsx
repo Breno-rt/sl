@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Calendario from "../components/Calendario"; 
 import logo from "../assets/titulo_logo.png"; 
-import PageTransition from "../components/animations/PageTransition"; // Importa a animação
+import PageTransition from "../components/animations/PageTransition"; 
 import "./Home.css"; 
 
 function Home() {
@@ -29,6 +29,7 @@ function Home() {
           <Link to="/usuarios" className="management-button">Usuários</Link>
           <Link to="/professores" className="management-button">Professores</Link>
           <Link to="/alunos" className="management-button">Alunos</Link>
+          <Link to="/turmas" className="management-button">Turmas <span className="beta">beta</span></Link>
           <Link to="/aulas" className="management-button">Dashboard</Link>
         </div>
 

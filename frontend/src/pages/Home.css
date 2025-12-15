@@ -16,11 +16,11 @@
     align-items: center;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative; /* Para centralizar o título */
+    position: relative; 
   }
   
   .logo {
-    width: 70px; /* Ajuste o tamanho conforme necessário */
+    width: 70px; 
     height: auto;
   }
   
@@ -79,6 +79,20 @@
     padding: 20px;
     overflow-y: auto;
   }
+
+  .beta {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 6px;
+
+  background: #0b97f5; 
+  color: #ffffff;
+
+  line-height: 1;
+}
+
   
   /* Responsividade */
   @media (max-width: 768px) {

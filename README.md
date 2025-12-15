@@ -218,8 +218,15 @@ O que já foi feito ✅
 
 - 03/12 -> Correção reset do filtro no modal 1 da lista de aulas ✅
 
+- 08/12 -> Correção Fuso Horário na apresentação dos dias da semana ✅
+
+- 10, 11, 12, 13/12 -> criação e testes (beta) de sessão de turmas  
+
+
 
 🔹 Próximo
+
+- Recorrência das aulas
 
 - api para mensagens whatsapp (Em verificação pelo meta)
 

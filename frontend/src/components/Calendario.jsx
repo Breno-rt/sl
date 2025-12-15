@@ -20,35 +20,42 @@ function Calendario() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchAulas() {
-      try {
-        const response = await api.get("/aulas");
+  async function fetchAulas() {
+    try {
+      const response = await api.get("/aulas");
 
-        const eventos = response.data.map((aula) => {
-          return {
-            id: aula.id,
-            title: aula.materia,
-            start: `${aula.data}T${aula.horario}:00`,
-            extendedProps: {
-              professor: aula.professor.nome,
-              aluno: aula.aluno.nome,
-              materia: aula.materia,
-              horario: aula.horario,
-            },
-          };
-        });
+      const eventos = response.data.map((aula) => {
+        const participante = aula.aluno
+          ? aula.aluno.nome
+          : aula.turma
+          ? `Turma: ${aula.turma.nome}`
+          : "—";
 
-        setAulas(eventos);
-      } catch (error) {
-        console.error("❌ Erro ao buscar aulas", error);
-      }
+        return {
+          id: aula.id,
+          title: aula.materia,
+          start: `${aula.data}T${aula.horario}:00`,
+          extendedProps: {
+            professor: aula.professor.nome,
+            aluno: participante,
+            materia: aula.materia,
+            horario: aula.horario,
+          },
+        };
+      });
+
+      setAulas(eventos);
+    } catch (error) {
+      console.error("❌ Erro ao buscar aulas", error);
     }
+  }
 
-    fetchAulas();
+  fetchAulas();
 
-    const interval = setInterval(fetchAulas, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const interval = setInterval(fetchAulas, 5000);
+  return () => clearInterval(interval);
+}, []);
+
 
   // 📌 Quando clica em um dia, abre o modal
   function handleDayClick(info) {

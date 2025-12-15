@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { autenticarToken } from "./middleware/auth.js";
-import { enviarEmail } from "./services/emailService.js"; // Importa o serviço de e-mails
+import { enviarEmail } from "./services/emailService.js"; 
 import moment from "moment-timezone"; // Garante que estamos importando o moment corretamente
 import { recuperarSenha, redefinirSenha } from './controllers/recuperarSenhaController.js';
 
@@ -308,85 +308,236 @@ router.delete('/alunos/:id', autenticarToken, async (req, res) => {
   }
 });
 
-// CRUD AULAS
 
-router.post('/aulas', autenticarToken, async (req, res) => {
-  const { data, horario, professorId, alunoId, materia } = req.body;
+// CRUD TURMAS
+
+// Criar turma
+router.post('/turmas', autenticarToken, async (req, res) => {
+  const { nome, materia, alunoIds } = req.body;
 
   try {
-    // 🔹 Validar o formato da data (YYYY-MM-DD)
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) {
-      return res.status(400).json({ error: "Formato de data inválido. Use YYYY-MM-DD." });
+    const alunoIdsValidos = (alunoIds || []).filter(id => id != null);
+
+    if (alunoIdsValidos.length === 0) {
+      return res.status(400).json({ error: 'Selecione pelo menos um aluno válido para a turma.' });
     }
 
-    // 🔹 Validar o formato do horário (HH:mm)
-    if (!/^\d{2}:\d{2}$/.test(horario)) {
-      return res.status(400).json({ error: "Formato de horário inválido. Use HH:mm." });
-    }
+    // 1️⃣ Criar a turma
+    const novaTurma = await prisma.turma.create({
+      data: { nome, materia },
+    });
 
-    // 🔹 Verificar conflito de horário para o professor
-    const conflitoProfessor = await prisma.aula.findFirst({
-      where: {
-        professorId,
-        data, // Compara a data como string (YYYY-MM-DD)
-        horario, // Compara o horário como string (HH:mm)
+    // 2️⃣ Criar os registros na tabela de junção AlunoTurma
+    await Promise.all(
+      alunoIdsValidos.map(alunoId =>
+        prisma.alunoTurma.create({
+          data: {
+            alunoId,
+            turmaId: novaTurma.id,
+          },
+        })
+      )
+    );
+
+    // 3️⃣ Buscar alunos conectados para retornar no response
+    const alunosConectados = await prisma.alunoTurma.findMany({
+      where: { turmaId: novaTurma.id },
+      include: { aluno: true },
+    });
+
+    res.status(201).json({ ...novaTurma, alunos: alunosConectados });
+  } catch (error) {
+    console.error("❌ Erro ao criar turma:", error);
+    res.status(500).json({ error: 'Erro ao criar turma' });
+  }
+});
+
+// Listar turmas
+router.get('/turmas', autenticarToken, async (req, res) => {
+  try {
+    const turmas = await prisma.turma.findMany({
+      include: {
+        alunos: { include: { aluno: true } },
+        aulas: true,
       },
+    });
+    res.json(turmas);
+  } catch (error) {
+    console.error("❌ Erro ao buscar turmas:", error);
+    res.status(500).json({ error: 'Erro ao buscar turmas' });
+  }
+});
+
+// Buscar turma por ID
+router.get('/turmas/:id', autenticarToken, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const turma = await prisma.turma.findUnique({
+      where: { id },
+      include: {
+        alunos: { include: { aluno: true } },
+        aulas: true,
+      },
+    });
+    if (!turma) return res.status(404).json({ error: 'Turma não encontrada' });
+    res.json(turma);
+  } catch (error) {
+    console.error("❌ Erro ao buscar turma:", error);
+    res.status(500).json({ error: 'Erro ao buscar turma' });
+  }
+});
+
+// Atualizar turma
+router.put('/turmas/:id', autenticarToken, async (req, res) => {
+  const { id } = req.params;
+  const { nome, materia, alunoIds } = req.body;
+
+  try {
+    const alunoIdsValidos = (alunoIds || []).filter(id => id != null);
+
+    // 1️⃣ Atualizar dados da turma
+    const turmaAtualizada = await prisma.turma.update({
+      where: { id },
+      data: { nome, materia },
+    });
+
+    // 2️⃣ Remover relações antigas de AlunoTurma
+    await prisma.alunoTurma.deleteMany({
+      where: { turmaId: id },
+    });
+
+    // 3️⃣ Criar novas relações na tabela de junção
+    await Promise.all(
+      alunoIdsValidos.map(alunoId =>
+        prisma.alunoTurma.create({
+          data: { alunoId, turmaId: id },
+        })
+      )
+    );
+
+    // 4️⃣ Buscar alunos conectados para retornar no response
+    const alunosConectados = await prisma.alunoTurma.findMany({
+      where: { turmaId: id },
+      include: { aluno: true },
+    });
+
+    res.json({ ...turmaAtualizada, alunos: alunosConectados });
+  } catch (error) {
+    console.error("❌ Erro ao atualizar turma:", error);
+    res.status(500).json({ error: 'Erro ao atualizar turma' });
+  }
+});
+
+// Deletar turma
+router.delete('/turmas/:id', autenticarToken, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Deletar registros na tabela de junção antes de deletar a turma
+    await prisma.alunoTurma.deleteMany({ where: { turmaId: id } });
+
+    await prisma.turma.delete({ where: { id } });
+    res.json({ message: 'Turma deletada com sucesso' });
+  } catch (error) {
+    console.error("❌ Erro ao deletar turma:", error);
+    res.status(500).json({ error: 'Erro ao deletar turma' });
+  }
+});
+
+
+
+// CRUD AULAS
+
+router.post("/aulas", autenticarToken, async (req, res) => {
+  const { data, horario, professorId, alunoId, turmaId, materia } = req.body;
+
+  try {
+    // 🔹 Validar se veio aluno OU turma
+    if ((!alunoId && !turmaId) || (alunoId && turmaId)) {
+      return res.status(400).json({
+        error: "Informe apenas aluno ou turma, nunca os dois.",
+      });
+    }
+
+    // 🔹 Validar data
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+      return res.status(400).json({ error: "Formato de data inválido." });
+    }
+
+    // 🔹 Validar horário
+    if (!/^\d{2}:\d{2}$/.test(horario)) {
+      return res.status(400).json({ error: "Formato de horário inválido." });
+    }
+
+    // 🔹 Conflito do professor
+    const conflitoProfessor = await prisma.aula.findFirst({
+      where: { professorId, data, horario },
     });
 
     if (conflitoProfessor) {
-      return res.status(400).json({ error: "O professor já tem uma aula marcada nesse horário." });
+      return res.status(400).json({
+        error: "O professor já tem aula nesse horário.",
+      });
     }
 
-    // 🔹 Verificar conflito de horário para o aluno
-    const conflitoAluno = await prisma.aula.findFirst({
-      where: {
-        alunoId,
-        data, // Compara a data como string (YYYY-MM-DD)
-        horario, // Compara o horário como string (HH:mm)
-      },
-    });
+    // 🔹 Conflito do aluno
+    if (alunoId) {
+      const conflitoAluno = await prisma.aula.findFirst({
+        where: { alunoId, data, horario },
+      });
 
-    if (conflitoAluno) {
-      return res.status(400).json({ error: "O aluno já tem uma aula marcada nesse horário." });
+      if (conflitoAluno) {
+        return res.status(400).json({
+          error: "O aluno já tem aula nesse horário.",
+        });
+      }
     }
 
-    // 🔹 Criar a aula no banco de dados
-    const novaAula = await prisma.aula.create({
-      data: {
-        data, // Armazenar a data como string (YYYY-MM-DD)
-        horario, // Armazenar o horário como string (HH:mm)
-        materia,
-        professor: { connect: { id: professorId } }, // Conecta ao professor
-        aluno: { connect: { id: alunoId } },         // Conecta ao aluno
-      },
-      include: { professor: true, aluno: true }, // Inclui os dados do professor e aluno
-    });
+    // 🔹 Conflito da turma
+    if (turmaId) {
+      const conflitoTurma = await prisma.aula.findFirst({
+        where: { turmaId, data, horario },
+      });
 
-    // 🔹 Função para formatar a data (DD/MM/YYYY)
-    const formatarData = (data) => {
-      const [ano, mes, dia] = data.split("-");
-      return `${dia}/${mes}/${ano}`;
+      if (conflitoTurma) {
+        return res.status(400).json({
+          error: "A turma já tem aula nesse horário.",
+        });
+      }
+    }
+
+    // 🔹 MONTA O DATA DINAMICAMENTE (ESSENCIAL)
+    const aulaData = {
+      data,
+      horario,
+      materia,
+      professor: {
+        connect: { id: professorId },
+      },
     };
 
-    // 🔹 Enviar e-mails de confirmação
-    const mensagemProfessor = `Olá, ${novaAula.professor.nome}!\n\n` +
-      "Uma nova aula foi agendada!\n\n" +
-      `📚 Matéria: ${materia}\n` +
-      `👨‍🎓 Aluno(a): ${novaAula.aluno.nome}\n` +
-      `📅 Data: ${formatarData(novaAula.data)}\n` + // Formata a data para DD/MM/YYYY
-      `⏰ Horário: ${horario}\n\n` +
-      `Caso tenha dúvidas, entre em contato com o suporte: (12) 996819714`;
+    if (alunoId) {
+      aulaData.aluno = {
+        connect: { id: alunoId },
+      };
+    }
 
-    const mensagemAluno = `Olá, ${novaAula.aluno.nome}!\n\n` +
-      "Sua aula foi agendada com sucesso!\n\n" +
-      `📚 Matéria: ${materia}\n` +
-      `👨‍🏫 Professor(a): ${novaAula.professor.nome}\n` +
-      `📅 Data: ${formatarData(novaAula.data)}\n` + // Formata a data para DD/MM/YYYY
-      `⏰ Horário: ${horario}\n\n` +
-      `Caso tenha dúvidas, entre em contato com o suporte: (12) 996819714`;
+    if (turmaId) {
+      aulaData.turma = {
+        connect: { id: turmaId },
+      };
+    }
 
-    //await enviarEmail(novaAula.professor.email, "Nova Aula Agendada", mensagemProfessor);
-    //await enviarEmail(novaAula.aluno.email, "Aula Confirmada", mensagemAluno);
+    // 🔹 Criar aula
+    const novaAula = await prisma.aula.create({
+      data: aulaData,
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
+    });
 
     res.status(201).json(novaAula);
   } catch (error) {
@@ -395,10 +546,17 @@ router.post('/aulas', autenticarToken, async (req, res) => {
   }
 });
 
+
+
+
 router.get('/aulas', autenticarToken, async (req, res) => {
   try {
     const aulas = await prisma.aula.findMany({
-      include: { professor: true, aluno: true },
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
     });
 
     res.json(aulas);
@@ -412,88 +570,82 @@ router.get('/aulas', autenticarToken, async (req, res) => {
 
 router.get('/aulas/:id', autenticarToken, async (req, res) => {
   const { id } = req.params;
+
   try {
     const aula = await prisma.aula.findUnique({
       where: { id },
-      include: { professor: true, aluno: true },
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
     });
+
     if (!aula) {
-      return res.status(404).json({ error: 'Aula não encontrada' });
+      return res.status(404).json({ error: "Aula não encontrada" });
     }
+
     res.json(aula);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar aula' });
+    res.status(500).json({ error: "Erro ao buscar aula" });
   }
 });
+
+
 
 router.put('/aulas/:id', autenticarToken, async (req, res) => {
   const { id } = req.params;
   const { data, horario, professorId, materia } = req.body;
 
   try {
-    // 🔹 Buscar a aula antes da atualização
     const aulaAntiga = await prisma.aula.findUnique({
       where: { id },
-      include: { professor: true, aluno: true },
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
     });
 
     if (!aulaAntiga) {
       return res.status(404).json({ error: "Aula não encontrada" });
     }
 
-    // 🔹 Validar o formato da data (YYYY-MM-DD)
     if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) {
-      return res.status(400).json({ error: "Formato de data inválido. Use YYYY-MM-DD." });
+      return res.status(400).json({ error: "Formato de data inválido." });
     }
 
-    // 🔹 Validar o formato do horário (HH:mm)
     if (!/^\d{2}:\d{2}$/.test(horario)) {
-      return res.status(400).json({ error: "Formato de horário inválido. Use HH:mm." });
+      return res.status(400).json({ error: "Formato de horário inválido." });
     }
 
-    // 🔹 Verificar conflito de horário para o professor (ignorando a aula atual)
     const conflitoProfessor = await prisma.aula.findFirst({
       where: {
         professorId,
-        data, // Compara a data como string (YYYY-MM-DD)
-        horario, // Compara o horário como string (HH:mm)
+        data,
+        horario,
         NOT: { id },
       },
     });
 
     if (conflitoProfessor) {
-      return res.status(400).json({ error: "O professor já tem uma aula marcada nesse horário." });
+      return res.status(400).json({ error: "O professor já tem aula nesse horário." });
     }
 
-    // 🔹 Atualizar a aula
     const aulaAtualizada = await prisma.aula.update({
       where: { id },
       data: {
-        data, // Armazenar a data como string (YYYY-MM-DD)
-        horario, // Armazenar o horário como string (HH:mm)
-        professor: { connect: { id: professorId } }, // Conecta ao novo professor
+        data,
+        horario,
         materia,
+        professor: { connect: { id: professorId } },
       },
-      include: { professor: true, aluno: true }, // Inclui os dados do professor e aluno
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
     });
-
-    // 🔹 Função para formatar a data (DD/MM/YYYY)
-    const formatarData = (data) => {
-      const [ano, mes, dia] = data.split("-");
-      return `${dia}/${mes}/${ano}`;
-    };
-
-    // 🔹 Enviar e-mails de atualização
-    const mensagem = `Olá!\n\nSua aula sofreu alterações. Aqui estão os novos detalhes:\n\n` +
-                     `📚 Matéria: ${materia}\n` +
-                     `👨‍🏫 Professor: ${aulaAtualizada.professor.nome}\n` +
-                     `👨‍🎓 Aluno: ${aulaAtualizada.aluno.nome}\n` +
-                     `📅 Data: ${formatarData(aulaAtualizada.data)}\n` + // Formata a data para DD/MM/YYYY
-                     `⏰ Horário: ${horario}\n\n` +
-                     `Caso tenha dúvidas, entre em contato com o suporte: (12) 996819714`;
-
-    //await enviarEmail(aulaAtualizada.professor.email, "Aula Atualizada", mensagem);
-    //await enviarEmail(aulaAtualizada.aluno.email, "Aula Atualizada", mensagem);
 
     res.json(aulaAtualizada);
   } catch (error) {
@@ -503,48 +655,33 @@ router.put('/aulas/:id', autenticarToken, async (req, res) => {
 });
 
 
+
 router.delete('/aulas/:id', autenticarToken, async (req, res) => {
   const { id } = req.params;
 
   try {
-    // 🔹 Buscar a aula antes de deletar para obter os dados
     const aula = await prisma.aula.findUnique({
       where: { id },
-      include: { professor: true, aluno: true },
+      include: {
+        professor: true,
+        aluno: true,
+        turma: true,
+      },
     });
 
     if (!aula) {
       return res.status(404).json({ error: "Aula não encontrada" });
     }
 
-    // 🔹 Função para formatar a data (DD/MM/YYYY)
-    const formatarData = (data) => {
-      const [ano, mes, dia] = data.split("-");
-      return `${dia}/${mes}/${ano}`;
-    };
-
-    // 🔹 Criar mensagem de cancelamento
-    const mensagem = `Olá!\n\nInfelizmente, sua aula foi cancelada. Segue os detalhes da aula cancelada abaixo:\n\n` +
-                     `📚 Matéria: ${aula.materia}\n` +
-                     `👨‍🏫 Professor: ${aula.professor.nome}\n` +
-                     `👨‍🎓 Aluno: ${aula.aluno.nome}\n` +
-                     `📅 Data: ${formatarData(aula.data)}\n` + // Formata a data para DD/MM/YYYY
-                     `⏰ Horário: ${aula.horario}\n\n` +
-                     `Caso tenha dúvidas, entre em contato com o suporte: (12) 996819714`;
-
-    // 🔹 Enviar e-mails de cancelamento
-    //await enviarEmail(aula.professor.email, "Aula Cancelada", mensagem);
-    //await enviarEmail(aula.aluno.email, "Aula Cancelada", mensagem);
-
-    // 🔹 Excluir a aula do banco de dados
     await prisma.aula.delete({ where: { id } });
 
-    res.json({ message: "Aula cancelada e e-mails enviados." });
+    res.json({ message: "Aula cancelada com sucesso." });
   } catch (error) {
     console.error("❌ Erro ao cancelar aula:", error);
     res.status(500).json({ error: "Erro ao cancelar aula" });
   }
 });
+
 //_________________________________________________________________________________________________________________________________________________________________________________________//
 
 

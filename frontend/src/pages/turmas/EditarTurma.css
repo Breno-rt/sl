@@ -1,0 +1,96 @@
+:root {
+  --azul-primario: #3582db;
+  --azul-hover: #72a5df;
+  --fundo-escuro: #242424;
+  --fundo-cinza: #3f3f3f;
+  --texto-claro: #ffffff;
+  --texto-cinza: #d8d8d8;
+  --sombra-azul: rgba(53, 130, 219, 0.3);
+  --vermelho-primario: rgb(209, 45, 45);
+  --vermelho-hover: rgb(175, 74, 74);
+}
+
+.editar-turma {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fundo-cinza);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--sombra-azul);
+  color: var(--texto-claro);
+}
+
+.editar-turma h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.editar-turma label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--texto-cinza);
+}
+
+.editar-turma input,
+.editar-turma select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--fundo-escuro);
+  color: var(--texto-claro);
+  font-size: 14px;
+}
+
+.editar-turma input:focus,
+.editar-turma select:focus {
+  outline: 2px solid var(--azul-primario);
+}
+
+.editar-turma input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.editar-turma button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+}
+
+.editar-turma button:first-of-type {
+  background-color: var(--azul-primario);
+  color: white;
+}
+
+.editar-turma button:first-of-type:hover {
+  background-color: var(--azul-hover);
+}
+
+.editar-turma button:last-of-type {
+  background-color: var(--vermelho-primario);
+  color: white;
+}
+
+.editar-turma button:last-of-type:hover {
+  background-color: var(--vermelho-hover);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .editar-turma {
+    padding: 15px;
+  }
+  
+  .editar-turma button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

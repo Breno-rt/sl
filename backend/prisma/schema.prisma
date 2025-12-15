@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,42 +7,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// -------------------- USUÁRIO --------------------
 model Usuario {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   nome      String
   email     String   @unique
   senha     String
   
-   // Campos para recuperação de senha
-  tokenRecuperacao String?    // Token temporário
-  tokenExpiracao   DateTime?  // Expiração do token
+  // Campos para recuperação de senha
+  tokenRecuperacao String?    
+  tokenExpiracao   DateTime?  
 }
 
+// -------------------- PROFESSOR --------------------
 model Professor {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   nome      String
-  email     String   @unique
-  telefone  String   @unique
+  email     String   
+  telefone  String   
   materia   String[]
   aulas     Aula[]
 }
 
+// -------------------- ALUNO --------------------
 model Aluno {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   nome      String
-  email     String   @unique
-  telefone  String   @unique
+  email     String   
+  telefone  String   
   materia   String[]  
+  aulas     Aula[]
+  turmas    AlunoTurma[]
+}
+
+// -------------------- TURMA --------------------
+model Turma {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  materia   String
+  alunos    AlunoTurma[]
   aulas     Aula[]
 }
 
+// -------------------- TABELA DE JUNÇÃO --------------------
+model AlunoTurma {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  aluno    Aluno    @relation(fields: [alunoId], references: [id])
+  alunoId  String   @db.ObjectId
+  turma    Turma    @relation(fields: [turmaId], references: [id])
+  turmaId  String   @db.ObjectId
+}
+
+// -------------------- AULA --------------------
 model Aula {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   data        String
   horario     String
+  materia     String
+
   professor   Professor @relation(fields: [professorId], references: [id])
-  professorId String @db.ObjectId
-  aluno       Aluno @relation(fields: [alunoId], references: [id])
-  alunoId     String @db.ObjectId
-  materia   String  
+  professorId String    @db.ObjectId
+
+  aluno       Aluno?    @relation(fields: [alunoId], references: [id])
+  alunoId     String?   @db.ObjectId
+
+  turma       Turma?    @relation(fields: [turmaId], references: [id])
+  turmaId     String?   @db.ObjectId
 }
+
